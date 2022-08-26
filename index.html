@@ -6,6 +6,13 @@
     
     const left_button = buttons.find(el => el.innerText === 'Decrement');
     const right_button = buttons.find(el => el.innerText === 'Increment');
+    const none_button = buttons.find(el => el.innerText === 'none');
+
+    function myFunction() {
+        none_button.click();
+    }
+
+    window.setInterval(myFunction, 1000);
 
     streamlitDoc.addEventListener('keydown', function(e) {
         switch (e.key) {

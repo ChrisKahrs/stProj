@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <title>Cartpole Visualizer</title>
+
+    <script language="JavaScript">
+        // Grab any URL parameters that were provided
+        const params = new URLSearchParams(window.location.search);
+        const darkMode = params.get('_theme') === 'dark';
+
+        // [OPTIONAL] Override the state parameter names if needed
+        const positionKey = params.has('pos') ? params.get('pos') : 'cart_position';
+        const angleKey = params.has('angle') ? params.get('angle') : 'pole_angle';
+
+        function init() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            setTheme();
+
+            // Add an event listener to catch messages from Bonsai
+            window.addEventListener('message', updateVisualizer, false);
+        }
+
+        // Run the init() function when the window loads
+        window.onload = init;
+        function setTheme() {
+
+            // Define JS objects for the SVG elements and code box
+            const pole = document.getElementById('pole');
+            const cart = document.getElementById('cart');
+            const track = document.getElementById('track');
+            const jsonBox = document.getElementById('jsonBox');
+
+            // Adjust the visualizer colors based upon the selected theme 
+            if (darkMode) {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+
+                track.style.fill = '#000';
+                cart.style.fill = '#555';
+                pole.style.fill = '#aaa';
+            }
+            else {
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#000';
+
+                track.style.fill = '#333';
+                cart.style.fill = '#ccc';
+                pole.style.fill = '#999';
+            }
+        }
+        function updateVisualizer() {
+
+            // Define JS objects for the SVG elements and code box
+            const pole = document.getElementById('pole');
+            const cart = document.getElementById('cart');
+            const track = document.getElementById('track');
+            const jsonBox = document.getElementById('jsonBox');
+
+            // Grab the message data 
+            var jsonData = JSON.parse(event.data);
+
+            // Pull out the state info and convert units 
+            var position = jsonData.state[positionKey];
+            var angle = (jsonData.state[angleKey] * 180.0) / Math.PI;
+
+            // Convert message to formatted JSON text for display 
+            var jsonString = JSON.stringify(jsonData, null, 4);
+
+            // Update the code block and positions of graphical elements 
+            jsonBox.textContent = jsonString;
+            cart.setAttribute('transform', `translate(${position} 0)`);
+            pole.setAttribute('transform', `translate(${position} 0) rotate(${angle} 0 0)`);
+
+
+    </script>
+</head>
+
+<body>
+    <table width="100%">
+        <tr>
+            <td width="30%">
+                <svg preserveAspectRatio="xMidYMid meet" height="100%" width="100%" viewBox="-1 -1 2 2">
+                    <rect id="track" x="-0.5" y="-0.025" width="1" height="0.05" fill="#333" />
+                    <rect id="cart" x="-0.15" y="-0.05" width="0.3" height="0.1" fill="#ccc" />
+                    <rect id="pole" x="-0.025" y="-0.5" width="0.05" height="0.5" fill="#999" />
+                </svg>
+            </td>
+            <td>
+                <pre id="jsonBox" style="display: box;">Waiting...</pre>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -21,6 +21,11 @@ def left_callback():
 
 def right_callback():
     st.session_state.counter += 1
+    
+def none_callback():
+    if 'noneCounter' not in st.session_state:
+        st.session_state.noneCounter = 0
+    st.session_state.noneCounter +=1
 
 list1 = [0,1,2,3,4]
 list2 = [1,2,4,7,st.session_state.counter+1*2]
@@ -40,8 +45,14 @@ st.caption(
 st.caption("Press Enter key to simulate Copy to clipboard button click")
 left_col, right_col, _ = st.columns([1, 1, 3])
 
+# try:
+#     st.write(st.experimental_get_query_params['direction'][0])
+# except:
+#     print("No direction")
+
 left_col.button("Decrement", on_click=left_callback)
 right_col.button("Increment", on_click=right_callback)
+right_col.button("none", on_click=none_callback)
 
 st.metric("Counter", st.session_state.counter)
 df = df.append({"A": st.session_state.counter+1, "B": st.session_state.counter+3*4, "C": st.session_state.counter+19}, ignore_index=True)
@@ -67,14 +78,17 @@ components.html(
 # chart = st.line_chart(np.random.randn(10, 2))
 full_replacement_chart = st.empty()
 
-while True:
-    new_rows = np.random.randn(10, 2)
+# while True:
+new_rows = np.random.randn(10, 2) 
+if 'new_rows' not in st.session_state:
+    st.session_state['new_rows'] = new_rows
+else:
+    st.session_state['new_rows'] += new_rows
+# Append data to the chart.
+# chart.add_rows(new_rows)
 
-    # Append data to the chart.
-    # chart.add_rows(new_rows)
-
-    # Just replace the chart
-    full_replacement_chart.line_chart(new_rows)
+# Just replace the chart
+full_replacement_chart.line_chart(st.session_state['new_rows'])
 
     # Wait
-    time.sleep(.1)
+    # time.sleep(.1)
