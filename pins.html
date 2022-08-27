@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <script>
+    function funcT() {
+
+        var markerPositions = [[225, 175], [75, 75], [150, 225], [400, 125], [300, 300]];
+
+        var svgNS = "http://www.w3.org/2000/svg";
+        var xlinkNS = "http://www.w3.org/1999/xlink";
+
+        for (var i = 0; i < markerPositions.length; i++) {
+            // Create an SVG <use> element
+            var use = document.createElementNS(svgNS, "use");
+            // Point it at our pin marker (the circle)
+            use.setAttributeNS(xlinkNS, "href", "#pin");
+            // Set it's x and y
+            use.setAttribute("x", markerPositions[i][0]);
+            use.setAttribute("y", markerPositions[i][1]);
+            // Add it to the "markers" group
+            document.getElementById("markers").appendChild(use);
+        };
+        var use2 = document.createElementNS(svgNS, "use2");
+            // Point it at our pin marker (the circle)
+            use2.setAttributeNS(xlinkNS, "href", "#xx");
+            use2.setAttribute("x", 45);
+            use2.setAttribute("y", 45);
+            document.getElementById("markers").appendChild(use2);
+    }
+    </script>
+
+<body>
+    <svg id="map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400"
+        viewBox="0 0 500 400">
+
+        <defs>
+            <!-- Define our map "pin". Just a circle in this case.
+           The circle is centred on (0,0) to make positioning at the destination point simpler. -->
+            <g id="pin">
+                <circle cx="0" cy="0" r="7" fill="white" stroke="green" stroke-width="2" />
+            </g>
+        </defs>
+        <defs>
+            <g id="xx" fill="#ddd" stroke="black" stroke-width="3">
+                <line x1="0.395891" y1="0.694598" x2="27.3959" y2="35.6946" stroke="black"/>
+                <line x1="27.3959" y1="1.3054" x2="0.395893" y2="36.3054" stroke="black"/>
+            </g>
+        </defs>
+
+        <!-- A simple floorplan map -->
+        <g id="floor" fill="#ddd" stroke="black" stroke-width="3">
+            <rect x="50" y="50" width="200" height="150" />
+            <rect x="100" y="200" width="150" height="150" />
+            <rect x="250" y="100" width="200" height="225" />
+        </g>
+
+
+        <!-- A group to hold the created pin refernces. Not necessary, but keeps things tidy. -->
+        <g id="markers">
+        </g>
+    </svg>
+    <button onclick="funcT()">Back</button>
+</body>
+
+</html>
