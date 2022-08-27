@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <title>ttt visualizer</title>
+
+    <script language="JavaScript">
+        // Grab any URL parameters that were provided
+        const params = new URLSearchParams(window.location.search);
+        const darkMode = params.get('_theme') === 'dark';
+
+        // [OPTIONAL] Override the state parameter names if needed
+        // const gameBoard = params.has('gameBoard') ? params.get('gameBoard') : 'gameBoard';
+        // const angleKey = params.has('boardMask') ? params.get('boardMask') : 'boardMask';
+        // const bonsPlayer = params.has('bonsPlayer') ? params.get('bonsPlayer') : 'bonsPlayer';
+        // const angleKey = params.has('winReward') ? params.get('winReward') : 'winReward';
+
+
+        function init() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            setTheme();
+
+            // Add an event listener to catch messages from Bonsai
+            window.addEventListener('message', updateVisualizer, false);
+        }
+
+        // Run the init() function when the window loads
+        window.onload = init;
+        function setTheme() {
+
+            // Define JS objects for the SVG elements and code box
+            const jsonBox = document.getElementById('jsonBox');
+
+            // Adjust the visualizer colors based upon the selected theme 
+            if (darkMode) {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            }
+            else {
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#000';
+            }
+        }
+        function updateVisualizer() {
+
+            //     // Define JS objects for the SVG elements and code box
+            const jsonBox = document.getElementById('jsonBox');
+            //     const topLeft = document.getElementById('topLeft');
+            //     // const xNum2 = document.getElementById('xNum2');
+            //     const xxNum2 = document.getElementById('xxNum2');
+
+            //     // Grab the message data 
+            var jsonData = JSON.parse(event.data);
+
+            // //     jsonBox.textContent = JSON.stringify(jsonData['state']['gameBoard'][0], null, 4)
+            // // }
+            //     var jsonString = JSON.stringify(jsonData, null, 4);
+
+            //     // Update the code block and positions of graphical elements 
+            //     jsonBox.textContent = jsonString;
+
+            //     if (parseInt(jsonData['state']['gameBoard'][0]) == 1) {
+            //         xxNum2.setAttribute(null, 'cx', 150);
+            //         xxNum2.setAttribute(null, 'cy', 150);
+            //         console.log("in if")
+            //     }
+            let x = jsonData['state']['gameBoard'];
+            jsonBox.innerText = jsonData['state']['gameBoard'][0] + "  " + jsonData['state']['gameBoard'][1] + "  " + jsonData['state']['gameBoard'][2] + "\n";
+            jsonBox.innerText += jsonData['state']['gameBoard'][3] + "  " + jsonData['state']['gameBoard'][4] + "  " + jsonData['state']['gameBoard'][5] + "\n";
+            jsonBox.innerText += jsonData['state']['gameBoard'][6] + "  " + jsonData['state']['gameBoard'][7] + "  " + jsonData['state']['gameBoard'][8] + "\n";
+
+        }
+
+//     function moveSection(idStr, xOffset, yOffset) {
+//     var domElemnt = document.getElementById(idStr);
+//     if (domElemnt) {
+//         var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
+//         domElemnt.setAttribute('transform', transformAttr);
+//     }
+// }
+// moveSection("bluecircle", 50, 20);
+
+    </script>
+</head>
+
+<body>
+    <div id="jsonBox">Waiting...</div>
+    <!-- 
+    <svg id="mainGrid" height="325" width="500">
+        <line x1="100" y1="0" x2="100" y2="300" style="stroke:rgb(255,0,0);stroke-width:2" />
+        <line x1="200" y1="0" x2="200" y2="300" style="stroke:rgb(255,0,0);stroke-width:2" />
+        <line x1="0" y1="100" x2="300" y2="100" style="stroke:rgb(255,0,0);stroke-width:2" />
+        <line x1="0" y1="200" x2="300" y2="200" style="stroke:rgb(255,0,0);stroke-width:2"/>
+        <circle cx="150" cy="150" r="30" fill="blue" />
+        <rect x="25" y="25" width="40" height="40" fill="green" />
+        Sorry, your browser does not support inline SVG.
+      </svg>
+      <div id="xNum1"></div>
+-->
+    <!-- <svg id ="xNum2" height="50" width="50" > -->
+    <!-- <object id="xxNum2" data="xSymbol.svg" height=50 width=50></object> -->
+
+</body>
+
+</html>
