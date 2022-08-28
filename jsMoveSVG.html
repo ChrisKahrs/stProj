@@ -9,27 +9,53 @@
 
                 var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
                 domElemnt.setAttribute('transform', transformAttr);
+                domElemnt.setAttribute('opacity', '1');
             }
-        }; 
+        };
+        const params = new URLSearchParams(window.location.search);
+        const darkMode = params.get('_theme') === 'dark';
+
+        // // [OPTIONAL] Override the state parameter names if needed
+        // const positionKey = params.has('pos') ? params.get('pos') : 'cart_position';
+        // const angleKey = params.has('angle') ? params.get('angle') : 'pole_angle';
+
+        function init() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            setTheme();
+
+            // Add an event listener to catch messages from Bonsai
+            window.addEventListener('message', updateVisualizer, false);
+        }
+
+        // Run the init() function when the window loads
+        window.onload = init;
     </script>
+    <style>
+        svg {
+            position: absolute;
+        }
+    </style>
 </head>
 
 <body>
+    <button x="50" y="350" onclick="moveSection('xMark', 200, 200)">topRight</button>
+    <button onclick="moveSection('oMark', 200, -200)">midRight</button>
     <svg width="300" height="400" id="topSVG">
-        <line x1="100" y1="0" x2="100" y2="300" style="stroke:rgb(255,0,0);stroke-width:2" />
-        <line x1="200" y1="0" x2="200" y2="300" style="stroke:rgb(255,0,0);stroke-width:2" />
-        <line x1="0" y1="100" x2="300" y2="100" style="stroke:rgb(255,0,0);stroke-width:2" />
-        <line x1="0" y1="200" x2="300" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
-        <circle id="oMark" cx="50" cy="250" r="30" stroke="black" stroke-width="3" fill="none" />
-        <g width=90 height=90 id="xMark">
-            <path stroke="blue" d="M20 20 L80 80" />
-            <path stroke="blue" d="M80 20 L20 80" />
+        <line x1="100" y1="0" x2="100" y2="300" style="stroke:black;stroke-width:4" />
+        <line x1="200" y1="0" x2="200" y2="300" style="stroke:black;stroke-width:4" />
+        <line x1="0" y1="100" x2="300" y2="100" style="stroke:black;stroke-width:4" />
+        <line x1="0" y1="200" x2="300" y2="200" style="stroke:black;stroke-width:4" />
+
+        <g width=90 height=90 id="xMark" opacity="0">
+            <line x1="20" y1="20" x2="80" y2="80" style="stroke:blue;stroke-width:4" />
+            <line x1="80" y1="20" x2="20" y2="80" style="stroke:blue;stroke-width:4" />
         </g>
+        <circle id="oMark" cx="50" cy="250" r="30" stroke="red" stroke-width="3" fill="none" />
+
         Sorry, your browser does not support inline SVG.
     </svg>
-    <button onclick="moveSection('xMark', 200, 200)">topRight</button>
-    <button onclick="moveSection('oMark', 200, -200)">midRight</button>
+
 </body>
 
 </html>
-
