@@ -1,0 +1,248 @@
+<html>
+
+<head>
+    <title>ttt visualizer</title>
+
+    <script language="JavaScript">
+        // Grab any URL parameters that were provided
+        const params = new URLSearchParams(window.location.search);
+        const darkMode = params.get('_theme') === 'dark';
+
+        function init() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            setTheme();
+
+            // Add an event listener to catch messages from Bonsai
+            window.addEventListener('message', updateVisualizer, false);
+        }
+
+        // Run the init() function when the window loads
+        window.onload = init;
+
+        function setTheme() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            if (darkMode) {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            }
+            else {
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#000';
+            }
+        }
+
+        function updateVisualizer() {
+
+            const jsonBox = document.getElementById('jsonBox');
+            const ULX = document.getElementById('ULX');
+            const ULO = document.getElementById('ULO');
+            const URX = document.getElementById('URX');
+            const URO = document.getElementById('URO');
+            const MLX = document.getElementById('MLX');
+            const MLO = document.getElementById('MLO');
+            const MRX = document.getElementById('MRX');
+            const MRO = document.getElementById('MRO');
+            const LLX = document.getElementById('LLX');
+            const LLO = document.getElementById('LLO');
+            const LRX = document.getElementById('LRX');
+            const LRO = document.getElementById('LRO');
+            const UMO = document.getElementById('UMO');
+            const MMO = document.getElementById('MMO');
+            const LMO = document.getElementById('LMO');
+            const UMX = document.getElementById('UMX');
+            const MMX = document.getElementById('MMX');
+            const LMX = document.getElementById('LMX');
+            var jsonData = JSON.parse(event.data);
+
+            var jsonString = JSON.stringify(jsonData, null, 4);
+
+            let x = jsonData['state']['gameBoard'];
+            jsonBox.innerText = x[0] + "  " + jsonData['state']['gameBoard'][1] + "  " + jsonData['state']['gameBoard'][2] + "\n";
+            jsonBox.innerText += jsonData['state']['gameBoard'][3] + "  " + jsonData['state']['gameBoard'][4] + "  " + jsonData['state']['gameBoard'][5] + "\n";
+            jsonBox.innerText += jsonData['state']['gameBoard'][6] + "  " + jsonData['state']['gameBoard'][7] + "  " + jsonData['state']['gameBoard'][8] + "\n";
+            jsonBox.innerText += "reward: " + jsonData['meta']['reward'] + "  bonsPlayer: " + jsonData['state']['bonsPlayer']  + "\n\n";
+            if(false) {
+                jsonBox.innerText += jsonString;
+            }
+
+            ULX.setAttribute("opacity", 0);
+            ULO.setAttribute("opacity", 0);
+            URX.setAttribute("opacity", 0);
+            URO.setAttribute("opacity", 0);
+            MLX.setAttribute("opacity", 0);
+            MLO.setAttribute("opacity", 0);
+            MRX.setAttribute("opacity", 0);
+            MRO.setAttribute("opacity", 0);
+            LLX.setAttribute("opacity", 0);
+            LLO.setAttribute("opacity", 0);
+            LRX.setAttribute("opacity", 0);
+            LRO.setAttribute("opacity", 0);
+            UMO.setAttribute("opacity", 0);
+            MMO.setAttribute("opacity", 0);
+            LMO.setAttribute("opacity", 0);
+            UMX.setAttribute("opacity", 0);
+            MMX.setAttribute("opacity", 0);
+            LMX.setAttribute("opacity", 0);
+            
+            // Upper Left
+            if (jsonData['state']['gameBoard'][0] == 1) {
+                ULX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][0] == 2) {
+                ULO.setAttribute("opacity", 100);
+            } else {
+                ULX.setAttribute("opacity", 0);
+                ULO.setAttribute("opacity", 0);
+            }
+            // Upper Middle
+            if (jsonData['state']['gameBoard'][1] == 1) {
+                UMX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][1] == 2) {
+                UMO.setAttribute("opacity", 100);
+            } else {
+                UMX.setAttribute("opacity", 0);
+                UMO.setAttribute("opacity", 0);
+            }
+            // Upper Right
+            if (jsonData['state']['gameBoard'][2] == 1) {
+                URX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][2] == 2) {
+                URO.setAttribute("opacity", 100);
+            } else {
+                URX.setAttribute("opacity", 0);
+                URO.setAttribute("opacity", 0);
+            }
+            // Middle Left
+            if (jsonData['state']['gameBoard'][3] == 1) {
+                MLX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][3] == 2) {
+                MLO.setAttribute("opacity", 100);
+            } else {
+                MLX.setAttribute("opacity", 0);
+                MLO.setAttribute("opacity", 0);
+            }
+            // Middle Middle
+            if (jsonData['state']['gameBoard'][4] == 1) {
+                MMX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][4] == 2) {
+                MMO.setAttribute("opacity", 100);
+            } else {
+                MMX.setAttribute("opacity", 0);
+                MMO.setAttribute("opacity", 0);
+            }
+            // Middle Right
+            if (jsonData['state']['gameBoard'][5] == 1) {
+                MRX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][5] == 2) {
+                MRO.setAttribute("opacity", 100);
+            } else {
+                MRX.setAttribute("opacity", 0);
+                MRO.setAttribute("opacity", 0);
+            }
+            // Lower Left
+            if (jsonData['state']['gameBoard'][6] == 1) {
+                LLX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][6] == 2) {
+                LLO.setAttribute("opacity", 100);
+            } else {
+                LLX.setAttribute("opacity", 0);
+                LLO.setAttribute("opacity", 0);
+            }
+            // Lower Middle
+            if (jsonData['state']['gameBoard'][7] == 1) {
+                LMX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][7] == 2) {
+                LMO.setAttribute("opacity", 100);
+            } else {
+                LMX.setAttribute("opacity", 0);
+                LMO.setAttribute("opacity", 0);
+            }
+            // Lower Right
+            if (jsonData['state']['gameBoard'][8] == 1) {
+                LRX.setAttribute("opacity", 100);
+            } else if (jsonData['state']['gameBoard'][8] == 2) {
+                LRO.setAttribute("opacity", 100);
+            } else {
+                LRX.setAttribute("opacity", 0);
+                LRO.setAttribute("opacity", 0);
+            }
+        }
+    </script>
+    <style>
+        svg {position: absolute;}
+    </style>
+</head>
+
+<body>
+    
+
+    <svg width="300" height="400" id="topSVG">
+        <line x1="100" y1="0" x2="100" y2="300" style="stroke:black;stroke-width:4" />
+        <line x1="200" y1="0" x2="200" y2="300" style="stroke:black;stroke-width:4" />
+        <line x1="0" y1="100" x2="300" y2="100" style="stroke:black;stroke-width:4" />
+        <line x1="0" y1="200" x2="300" y2="200" style="stroke:black;stroke-width:4" />
+        <!-- Upper Left -->
+        <g width=90 height=90 id="ULX" opacity="0">
+            <line x1="20" y1="20" x2="80" y2="80" style="stroke:blue;stroke-width:4" />
+            <line x1="80" y1="20" x2="20" y2="80" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="ULO" cx="50" cy="50" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Upper Middle -->
+        <g width=90 height=90 id="UMX" opacity="0">
+            <line x1="120" y1="20" x2="180" y2="80" style="stroke:blue;stroke-width:4" />
+            <line x1="180" y1="20" x2="120" y2="80" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="UMO" cx="150" cy="50" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+
+        <!-- Upper Right -->
+        <g width=90 height=90 id="URX" opacity="0">
+            <line x1="220" y1="20" x2="280" y2="80" style="stroke:blue;stroke-width:4" />
+            <line x1="280" y1="20" x2="220" y2="80" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="URO" cx="250" cy="50" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Middle Left -->
+        <g width=90 height=90 id="MLX" opacity="0">
+            <line x1="20" y1="120" x2="80" y2="180" style="stroke:blue;stroke-width:4" />
+            <line x1="80" y1="120" x2="20" y2="180" style="stroke:blue;stroke-width:4" />
+
+        </g>
+        <circle id="MLO" cx="50" cy="150" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Middle Middle -->
+        <g width=90 height=90 id="MMX" opacity="0">
+            <line x1="120" y1="120" x2="180" y2="180" style="stroke:blue;stroke-width:4" />
+            <line x1="180" y1="120" x2="120" y2="180" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="MMO" cx="150" cy="150" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Middle Right -->
+        <g width=90 height=90 id="MRX" opacity="0">
+            <line x1="220" y1="120" x2="280" y2="180" style="stroke:blue;stroke-width:4" />
+            <line x1="280" y1="120" x2="220" y2="180" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="MRO" cx="250" cy="150" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Lower Left -->
+        <g width=90 height=90 id="LLX" opacity="0">
+            <line x1="20" y1="220" x2="80" y2="280" style="stroke:blue;stroke-width:4" />
+            <line x1="80" y1="220" x2="20" y2="280" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="LLO" cx="50" cy="250" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Lower Middle -->
+        <g width=90 height=90 id="LMX" opacity="0">
+            <line x1="120" y1="220" x2="180" y2="280" style="stroke:blue;stroke-width:4" />
+            <line x1="180" y1="220" x2="120" y2="280" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="LMO" cx="150" cy="250" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+        <!-- Lower Right -->
+        <g width=90 height=90 id="LRX" opacity="0">
+            <line x1="220" y1="220" x2="280" y2="280" style="stroke:blue;stroke-width:4" />
+            <line x1="280" y1="220" x2="220" y2="280" style="stroke:blue;stroke-width:4" />
+        </g>
+        <circle id="LRO" cx="250" cy="250" r="30" stroke="red" stroke-width="4" fill="none" opacity="0"/>
+
+        Sorry, your browser does not support inline SVG.
+    </svg>
+    <div id="jsonBox">Waiting...</div>
+
+</body>
+
+</html>
