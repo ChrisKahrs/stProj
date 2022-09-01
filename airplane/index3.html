@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>Artificial Horizon Visualizer</title>
+
+    <script language="JavaScript">
+        angle = 0;
+        lift = 0;
+        function updateVisualizer(liftx, rot) {
+            const bgImg = document.getElementById('bgImg');
+            angle += rot;
+            lift += liftx
+            let stringy = 'translate (50,' + (50 + lift) + ') rotate(' + (angle) + ',100,100)';
+            bgImg.setAttribute("transform", stringy);
+        }
+
+        window.onload = function() {
+            const bgImg = document.getElementById('bgImg')
+            bgImg.setAttribute("transform", "translate (50,50)");
+        }
+    </script>
+ </head>
+
+<body>
+    <svg id="svgroot" width="300" height="300" viewBox="0 0 325 325" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="bgImg">
+            <svg width="200" height="201" viewBox="0 0 200 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M200 101C200 127.522 189.464 152.957 170.711 171.711C151.957 190.464 126.522 201 100 201C73.4784 201 48.043 190.464 29.2893 171.711C10.5357 152.957 4.00466e-06 127.522 0 101L100 101H200Z" fill="#C8AA40"/>
+                <path d="M0 100C0 73.4783 10.5357 48.043 29.2893 29.2893C48.043 10.5357 73.4783 2.00233e-06 100 0C126.522 -2.00233e-06 151.957 10.5357 170.711 29.2893C189.464 48.0429 200 73.4783 200 100L100 100H0Z" fill="#66D0F1"/>
+                <line x1="47.9798" y1="78.0001" x2="147.98" y2="76.99" stroke="black" stroke-width="4"/>
+                <line x1="73" y1="56" x2="123" y2="56" stroke="black" stroke-width="4"/>
+                </svg>
+        </g>
+        <g id="fgImg">
+            <svg width="299" height="300" viewBox="0 0 299 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M60.0015 150H0C0 67.1573 66.7125 0 149.007 0C231.301 0 298.013 67.1573 298.013 150H237.998C237.999 149.833 238 149.667 238 149.5C238 102.832 198.153 65 149 65C99.8467 65 60 102.832 60 149.5C60 149.667 60.0005 149.833 60.0015 150Z" fill="#52ABEC"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M60.0015 150H0C0 232.843 66.7125 300 149.007 300C231.301 300 298.013 232.843 298.013 150H237.998C237.999 150.167 238 150.333 238 150.5C238 197.168 198.153 235 149 235C99.8467 235 60 197.168 60 150.5C60 150.333 60.0005 150.167 60.0015 150Z" fill="#F2AB22"/>
+                <rect x="233" y="115" width="23" height="13" fill="black"/>
+                <rect x="50" y="89" width="23" height="13" fill="black"/>
+                <rect x="222" y="89" width="23" height="13" fill="black"/>
+                <rect x="39" y="115" width="23" height="13" fill="black"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M127.307 145C126.46 147.512 126 150.202 126 153C126 166.807 137.193 178 151 178C164.807 178 176 166.807 176 153C176 150.202 175.54 147.512 174.693 145H170.422C171.439 147.466 172 150.167 172 153C172 164.598 162.598 174 151 174C139.402 174 130 164.598 130 153C130 150.167 130.561 147.466 131.578 145H127.307Z" fill="black"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M137.013 146H61V150H138.112C137.471 148.763 137.087 147.415 137.013 146ZM163.888 150H239V146H164.987C164.913 147.415 164.529 148.763 163.888 150Z" fill="black"/>
+                </svg>
+        </g>
+    </svg>
+    <button type="button" onclick=updateVisualizer(0,-5)>rotate right</button>
+    <button type="button" onclick=updateVisualizer(0,5)>rotate left</button>
+    <button type="button" onclick=updateVisualizer(5,0)>up</button>
+    <button type="button" onclick=updateVisualizer(-5,0)>down</button>
+</body>
+</html>

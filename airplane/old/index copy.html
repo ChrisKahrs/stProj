@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <title>No Viz Visualizer</title>
+
+    <script language="JavaScript">
+        // Grab any URL parameters that were provided
+        const params = new URLSearchParams(window.location.search);
+        const darkMode = params.get('_theme') === 'dark';
+
+        function init() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            setTheme();
+
+            // Add an event listener to catch messages from Bonsai
+            window.addEventListener('message', updateVisualizer, false);
+        }
+
+        // Run the init() function when the window loads
+        window.onload = init;
+
+        function setTheme() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            if (darkMode) {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            }
+            else {
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#000';
+            }
+        }
+
+        function updateVisualizer() {
+            const jsonStateBox = document.getElementById('jsonStateBox');
+            const jsonActionBox = document.getElementById('jsonActionBox');
+            const jsonRewardBox = document.getElementById('jsonRewardBox');
+
+            // Grab the message data 
+            var jsonData = JSON.parse(event.data);
+
+            // Convert message to formatted JSON text for display 
+            // var jsonString = JSON.stringify(jsonData, null, 4);
+            jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
+                if (v instanceof Array)
+                    return JSON.stringify(v);
+                return v;
+            }, 4);
+            jsonActionString = JSON.stringify(jsonData['action'], function (k, v) {
+                if (v instanceof Array)
+                    return JSON.stringify(v);
+                return v;
+            }, 4);
+            jsonRewardString = jsonData['meta']['reward'];
+
+            // Update the code block and positions of graphical elements 
+            jsonStateBox.textContent = jsonStateString;
+            jsonActionBox.textContent = jsonActionString;
+            jsonRewardBox.textContent = jsonRewardString;
+        }
+
+    </script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <center>General Visualizer! Instructions to create a full featured one with dynamic svg manipulation:<br>
+        https://docs.microsoft.com/en-us/bonsai/tutorials/visualizer-plugin </center>
+    <table width="100%">
+        <tr>
+            <th width="40%">STATE</th>
+            <th width="40%">ACTION</th>
+            <th>REWARD</th>
+        </tr>
+        <tr>
+            <td width="40%">
+                <pre id="jsonStateBox" style="display: box;">Waiting...</pre>
+            </td>
+            <td width="40%">
+                <pre id="jsonActionBox" style="display: box;">Waiting...</pre>
+            </td>
+            <td>
+                <pre id="jsonRewardBox" style="display: box;">Waiting...</pre>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,24 +1,6 @@
-<svg width="400" height="404" viewBox="0 0 400 404" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d_0_1)">
-<ellipse cx="200" cy="198" rx="196" ry="198" fill="#4ECDE9"/>
-</g>
-<line x1="4.00383" y1="196.5" x2="396.004" y2="199.5" stroke="black" stroke-opacity="0.97"/>
-<line x1="128" y1="156.5" x2="268" y2="156.5" stroke="black"/>
-<line x1="155" y1="112.5" x2="241" y2="112.5" stroke="black"/>
-<line x1="155" y1="291.5" x2="241" y2="291.5" stroke="black"/>
-<line x1="187" y1="336.5" x2="214" y2="336.5" stroke="black"/>
-<line x1="187" y1="77.5" x2="214" y2="77.5" stroke="black"/>
-<line x1="128" y1="239.5" x2="268" y2="239.5" stroke="black"/>
-<defs>
-<filter id="filter0_d_0_1" x="0" y="0" width="400" height="404" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="4"/>
-<feGaussianBlur stdDeviation="2"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
-</filter>
-</defs>
+<svg width="200" height="201" viewBox="0 0 200 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M200 101C200 127.522 189.464 152.957 170.711 171.711C151.957 190.464 126.522 201 100 201C73.4784 201 48.043 190.464 29.2893 171.711C10.5357 152.957 4.00466e-06 127.522 0 101L100 101H200Z" fill="#C8AA40"/>
+<path d="M0 100C0 73.4783 10.5357 48.043 29.2893 29.2893C48.043 10.5357 73.4783 2.00233e-06 100 0C126.522 -2.00233e-06 151.957 10.5357 170.711 29.2893C189.464 48.0429 200 73.4783 200 100L100 100H0Z" fill="#66D0F1"/>
+<line x1="47.9798" y1="78.0001" x2="147.98" y2="76.99" stroke="black" stroke-width="4"/>
+<line x1="73" y1="56" x2="123" y2="56" stroke="black" stroke-width="4"/>
 </svg>
