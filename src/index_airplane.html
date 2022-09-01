@@ -50,13 +50,15 @@
             const jsonRewardBox = document.getElementById('jsonRewardBox');
             const airspeed = document.getElementById('airspeed');
             const altitude = document.getElementById('altitude');
-            console.log("in" + event.data)
+            const pitch_roll = document.getElementById('pitch_roll');
 
             // Grab the message data 
             var jsonData = JSON.parse(event.data);
 
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
+// Radians * 180 / Math.Pi. The guages should be able to show -180 to +180 degrees
+            pitch_roll.innerText = "pit: " + jsonData.pitch * 180 / Math.PI + " . rol: " + jsonData.roll * 180 / Math.PI;
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(2) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(2);
             altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(2) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(2);
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
