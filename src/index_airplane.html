@@ -15,6 +15,8 @@
 
             // Add an event listener to catch messages from Bonsai
             window.addEventListener('message', updateVisualizer, false);
+            const bgImg = document.getElementById('bgImg')
+            bgImg.setAttribute("transform", "translate (50,50)");
         }
 
         // Run the init() function when the window loads
@@ -41,11 +43,6 @@
         //     let stringy = 'translate (50,' + (50 + lift) + ') rotate(' + (angle) + ',100,100)';
         //     bgImg.setAttribute("transform", stringy);
         // }
-
-        window.onload = function() {
-            const bgImg = document.getElementById('bgImg')
-            bgImg.setAttribute("transform", "translate (50,50)");
-        }
 
         function updateVisualizer() {
             const jsonStateBox = document.getElementById('jsonStateBox');
@@ -122,7 +119,7 @@
         </tr>
         <tr>
             <td width="20%" style="vertical-align: center; align-content: center;">
-<!--                 <img src="airspeed.png" width="200" height="200"> -->
+                <img src="airspeed.png" width="200" height="200">
             </td>
             <td width="20%">
                 <svg id="svgroot" width="200" height="200" viewBox="0 0 325 325" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -149,7 +146,7 @@
                 </svg>
             </td>
              <td width="20%">
-<!--                 <img src="altimeter.png" width="200" height="200"> -->
+                <img src="altimeter.png" width="200" height="200">
             </td>
             <td width="20%">
                 <pre id="jsonActionBox" style="display: box; vertical-align: top;">Waiting...</pre>
