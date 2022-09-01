@@ -47,12 +47,13 @@
             bgImg.setAttribute("transform", "translate (50,50)");
         }
 
-        function updateVisualizer(event) {
+        function updateVisualizer() {
             const jsonStateBox = document.getElementById('jsonStateBox');
             const jsonActionBox = document.getElementById('jsonActionBox');
             const jsonRewardBox = document.getElementById('jsonRewardBox');
             const airspeed = document.getElementById('airspeed');
             const altitude = document.getElementById('altitude');
+            console.log("in" + event.data)
 
             // Grab the message data 
             var jsonData = JSON.parse(event.data);
@@ -61,7 +62,7 @@
             // var jsonString = JSON.stringify(jsonData, null, 4);
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'] + " / tar: " + jsonData['state']['targetSpeed'];
             altitude.innerText = "act:" + jsonData['state']['aircraftAltitude'] + " / tar: " + jsonData['state']['targetAltitude'];
-            jsonActionString = JSON.stringify(jsonData['action'], function (k, v) {
+            jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
