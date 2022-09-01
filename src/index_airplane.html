@@ -58,9 +58,9 @@
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
 // Radians * 180 / Math.Pi. The guages should be able to show -180 to +180 degrees
-            pitch_roll.innerText = "pit: " + jsonData.pitch * 180 / Math.PI + " . rol: " + jsonData.roll * 180 / Math.PI;
-            airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(2) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(2);
-            altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(2) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(2);
+            pitch_roll.innerText = "pit: " + (jsonData['state']['aircraftPitch'] * 180 / Math.PI).toFixed(3) + " . rol: " + (jsonData['state']['aircraftRoll'] * 180 / Math.PI).toFixed(3);
+            airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
+            altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(3) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(3);
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
