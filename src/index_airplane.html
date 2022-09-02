@@ -51,14 +51,20 @@
             const airspeed = document.getElementById('airspeed');
             const altitude = document.getElementById('altitude');
             const pitch_roll = document.getElementById('pitch_roll');
+            const bgImg = document.getElementById('bgImg')
 
             // Grab the message data 
             var jsonData = JSON.parse(event.data);
 
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
-// Radians * 180 / Math.Pi. The guages should be able to show -180 to +180 degrees
-            pitch_roll.innerText = "pit: " + (jsonData['state']['aircraftPitch'] * 180 / Math.PI).toFixed(3) + " . rol: " + (jsonData['state']['aircraftRoll'] * 180 / Math.PI).toFixed(3);
+            // Radians * 180 / Math.Pi. The guages should be able to show -180 to +180 degrees
+
+            pitch_angle = jsonData['state']['aircraftPitch'] * 180 / Math.PI
+            roll_angle = jsonData['state']['aircraftRoll'] * 180 / Math.PI
+            bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
+
+            pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
             altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(3) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(3);
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
@@ -93,7 +99,7 @@
 <body>
     <center>General Visualizer! Instructions to create a full featured one with dynamic svg manipulation:<br>
         https://docs.microsoft.com/en-us/bonsai/tutorials/visualizer-plugin </center>
-    <table width="100%">
+    <!-- <table width="100%">
         <tr>
             <th width="40%">STATE</th>
             <th width="40%">ACTION</th>
@@ -110,7 +116,7 @@
                 <pre id="jsonRewardBox" style="display: box; vertical-align: top;">Waiting...</pre>
             </td>
         </tr>
-    </table>
+    </table> -->
     <table width="100%">
         <tr>
             <th width="20%">AirSpeed Indicator</th>
