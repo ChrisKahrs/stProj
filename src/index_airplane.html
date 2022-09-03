@@ -133,35 +133,22 @@
 
         @import url("https://fonts.googleapis.com/css?family=Roboto");
 
-        /* html {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 100%;
-            height: 100%;
-        } */
-
-        /* svg {
-            display: none;
-        } */
-
         body {
             margin: 0;
         }
 
         .major_marker {
             fill: transparent;
-            stroke: #f0f0c9;
-            stroke-width: 10;
+            stroke: #black;
+            stroke-width: 12;
             stroke-dasharray: 0.2, 9.8;
             stroke-dashoffset: 5;
         }
 
         .minor_marker {
-            fill: grey;
-            stroke: #0f0e0e;
-            stroke-width: 7;
+            fill: lightgrey;
+            stroke: #darkgrey;
+            stroke-width: 4;
             stroke-dasharray: 0.2, 0.8;
             stroke-dashoffset: 5;
         }
@@ -242,7 +229,7 @@
                 <img src="airspeed.png" width="200" height="200">
             </td>
             <td>
-                <svg id="svgroot" width="200" height="200" viewBox="0 0 325 325" fill="none"
+                <svg id="svgroot" width="200" height="200" viewBox="0 0 325 325" fill="grey"
                     xmlns="http://www.w3.org/2000/svg">
                     <g id="bgImg">
                         <svg width="200" height="201" viewBox="0 0 200 201" fill="none"
@@ -287,14 +274,14 @@
                     <circle class="major_marker" r="90" pathLength="100" />
                     <text id="text" class="text" x="45" y="5"></text>
 
-                    <g id="thousand_hand">
-                        <line class="hand" x1="0" y1="0" x2="0" y2="-50" />
-                        <line class="hand hand-thousand hand-thick" x1="0" y1="-12" x2="0" y2="-50" />
-                    </g>
-
                     <g id="hundred_hand">
                         <line class="hand" x1="0" y1="0" x2="0" y2="-80" />
                         <line class="hand hand-hundred hand-thick" x1="0" y1="-12" x2="0" y2="-80" />
+                    </g>
+
+                    <g id="thousand_hand">
+                        <line class="hand" x1="0" y1="0" x2="0" y2="-50" />
+                        <line class="hand hand-thousand hand-thick" x1="0" y1="-12" x2="0" y2="-50" />
                     </g>
 
                     <g id="tenThousand_hand">
