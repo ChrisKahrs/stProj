@@ -66,9 +66,9 @@
             thousands = ((altitude / 1000)/tenThousands) % 10;
             hundreds = ((altitude / 100)/thousands) % 10;
 
-            // thousandElement.setAttribute("transform", `rotate(${(360 / 100) * thousands})`);
-            // hundredElement.setAttribute("transform", `rotate(${(360 / 100) * (altitude % 100)))`);
-            // tenThousandElement.setAttribute("transform", `rotate(${(360 / 100) * second})`);
+            thousandElement.setAttribute("transform", `rotate(${(360 / 100) * thousands})`);
+            tenThousandElement.setAttribute("transform", `rotate(${(360 / 10) * tenThousands})`);
+            hundredElement.setAttribute("transform", `rotate(${(360 / 1) * hundreds})`);
 
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
@@ -139,7 +139,7 @@
 
         .major_marker {
             fill: transparent;
-            stroke: #black;
+            stroke: black;
             stroke-width: 12;
             stroke-dasharray: 0.2, 9.8;
             stroke-dashoffset: 5;
@@ -147,7 +147,7 @@
 
         .minor_marker {
             fill: lightgrey;
-            stroke: #darkgrey;
+            stroke: darkgrey;
             stroke-width: 4;
             stroke-dasharray: 0.2, 0.8;
             stroke-dashoffset: 5;
@@ -198,25 +198,8 @@
 <body>
     <center>General Visualizer! Instructions to create a full featured one with dynamic svg manipulation:<br>
         https://docs.microsoft.com/en-us/bonsai/tutorials/visualizer-plugin </center>
-    <!-- <table width="100%">
-        <tr>
-            <th width="40%">STATE</th>
-            <th width="40%">ACTION</th>
-            <th>REWARD</th>
-        </tr>
-        <tr>
-            <td width="40%">
-                <pre id="jsonStateBox" style="display: box;">Waiting...</pre>
-            </td>
-            <td width="40%">
-                <pre id="jsonActionBox" style="display: box; vertical-align: top;">Waiting...</pre>
-            </td>
-            <td>
-                <pre id="jsonRewardBox" style="display: box; vertical-align: top;">Waiting...</pre>
-            </td>
-        </tr>
-    </table> -->
-    <table width="100%">
+
+    <table width="100%" fill="lightgrey">
         <tr>
             <th width="20%">AirSpeed Indicator</th>
             <th width="20%">Artificial Horizon</th>
@@ -319,6 +302,25 @@
             </td>
             <td>
                 <pre id="altitudeDelta" style="text-align: center">altitude delta</pre>
+            </td>
+        </tr>
+    </table>
+
+    <table width="100%">
+        <tr>
+            <th width="40%">STATE</th>
+            <th width="40%">ACTION</th>
+            <th>REWARD</th>
+        </tr>
+        <tr>
+            <td width="40%">
+                <pre id="jsonStateBox" style="display: box;">Waiting...</pre>
+            </td>
+            <td width="40%">
+                <pre id="jsonActionBox" style="display: box; vertical-align: top;">Waiting...</pre>
+            </td>
+            <td>
+                <pre id="jsonRewardBox" style="display: box; vertical-align: top;">Waiting...</pre>
             </td>
         </tr>
     </table>
