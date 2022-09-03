@@ -54,7 +54,16 @@
             const altitude = document.getElementById('altitude');
             const pitch_roll = document.getElementById('pitch_roll');
             const bgImg = document.getElementById('bgImg');
+            const textElement = document.getElementById("text");
+            const thousandElement = document.getElementById("thousand_hand");
+            const tenThousandElement = document.getElementById("tenThousand_hand");
+            const hundredElement = document.getElementById("hundred_hand");
 
+
+
+            // thousandElement.setAttribute("transform", `rotate(${(360 / 12) * hour})`);
+            // hundredElement.setAttribute("transform", `rotate(${(360 / 60) * minute})`);
+            // tenThousandElement.setAttribute("transform", `rotate(${(360 / 60) * second})`);
             // Grab the message data 
             var jsonData = JSON.parse(event.data);
 
@@ -67,7 +76,7 @@
             bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
 
             pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
-            
+
             // airspeed calculations
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
@@ -79,7 +88,7 @@
             else {
                 airspeedDelta.style.color = "black";
             };
- 
+
             // altitude calculations
             altitude.innerText = "act:" + jsonData['state']['aircraftAltitude'].toFixed(3) + " / tar: " + jsonData['state']['targetAltitude'].toFixed(3);
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
@@ -91,12 +100,12 @@
             else {
                 altitudeDelta.style.color = "black";
             };
-            
+
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            },2);
+            }, 2);
             jsonActionString = JSON.stringify(jsonData['action'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
@@ -117,6 +126,81 @@
         td {
             border: 1px solid black;
             border-collapse: collapse;
+        }
+
+        @import url("https://fonts.googleapis.com/css?family=Roboto");
+
+        html {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        svg {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .major_marker {
+            fill: transparent;
+            stroke: #f0f0c9;
+            stroke-width: 10;
+            stroke-dasharray: 0.2, 9.8;
+            stroke-dashoffset: 5;
+        }
+
+        .minor_marker {
+            fill: transparent;
+            stroke: #0f0e0e;
+            stroke-width: 7;
+            stroke-dasharray: 0.2, 0.8;
+            stroke-dashoffset: 5;
+        }
+
+        .hand {
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .hand-hundred {
+            stroke: red;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .hand-thousand {
+            stroke: blue;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .hand-thick {
+            stroke-width: 7;
+        }
+
+        .hand-tenThousand {
+            stroke: green;
+        }
+
+        .center {
+            fill: transparent;
+            stroke-width: 2;
+            stroke: white;
+        }
+
+        .text {
+            fill: #f0f0c9;
+            font-family: "Roboto", sans-serif;
+            text-anchor: middle;
+            cursor: pointer;
+            user-select: none;
         }
     </style>
 </head>
@@ -152,33 +236,70 @@
         </tr>
         <tr>
             <td width="20%" style="vertical-align: center; align-content: center;">
-                <img src="airspeed.png" width="200" height="200">
+                <!-- <img src="airspeed.png" width="200" height="200"> -->
+                <svg width="200" height="200" viewBox="-100 -100 200 200">
+                    <circle class="minor_marker" r="90" pathLength="100" />
+                    <circle class="major_marker" r="90" pathLength="100" />
+                    <text id="text" class="text" x="45" y="5"></text>
+
+                    <g id="thousand_hand">
+                        <line class="hand" x1="0" y1="0" x2="0" y2="-50" />
+                        <line class="hand hand-thousand hand-thick" x1="0" y1="-12" x2="0" y2="-50" />
+                    </g>
+
+                    <g id="hundred_hand">
+                        <line class="hand" x1="0" y1="0" x2="0" y2="-80" />
+                        <line class="hand hand-hundred hand-thick" x1="0" y1="-12" x2="0" y2="-80" />
+                    </g>
+
+                    <g id="tenThousand_hand">
+                        <line class="hand hand-tenThousand" x1="0" y1="12" x2="0" y2="-80" />
+                    </g>
+
+                    <circle class="center" r="3" />
+                </svg>
+
             </td>
             <td width="20%">
-                <svg id="svgroot" width="200" height="200" viewBox="0 0 325 325" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg id="svgroot" width="200" height="200" viewBox="0 0 325 325" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <g id="bgImg">
-                        <svg width="200" height="201" viewBox="0 0 200 201" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M200 101C200 127.522 189.464 152.957 170.711 171.711C151.957 190.464 126.522 201 100 201C73.4784 201 48.043 190.464 29.2893 171.711C10.5357 152.957 4.00466e-06 127.522 0 101L100 101H200Z" fill="#C8AA40"/>
-                            <path d="M0 100C0 73.4783 10.5357 48.043 29.2893 29.2893C48.043 10.5357 73.4783 2.00233e-06 100 0C126.522 -2.00233e-06 151.957 10.5357 170.711 29.2893C189.464 48.0429 200 73.4783 200 100L100 100H0Z" fill="#66D0F1"/>
-                            <line x1="47.9798" y1="78.0001" x2="147.98" y2="76.99" stroke="black" stroke-width="4"/>
-                            <line x1="73" y1="56" x2="123" y2="56" stroke="black" stroke-width="4"/>
-                            </svg>
+                        <svg width="200" height="201" viewBox="0 0 200 201" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M200 101C200 127.522 189.464 152.957 170.711 171.711C151.957 190.464 126.522 201 100 201C73.4784 201 48.043 190.464 29.2893 171.711C10.5357 152.957 4.00466e-06 127.522 0 101L100 101H200Z"
+                                fill="#C8AA40" />
+                            <path
+                                d="M0 100C0 73.4783 10.5357 48.043 29.2893 29.2893C48.043 10.5357 73.4783 2.00233e-06 100 0C126.522 -2.00233e-06 151.957 10.5357 170.711 29.2893C189.464 48.0429 200 73.4783 200 100L100 100H0Z"
+                                fill="#66D0F1" />
+                            <line x1="47.9798" y1="78.0001" x2="147.98" y2="76.99" stroke="black" stroke-width="4" />
+                            <line x1="73" y1="56" x2="123" y2="56" stroke="black" stroke-width="4" />
+                        </svg>
                     </g>
                     <g id="fgImg">
-                        <svg width="299" height="300" viewBox="0 0 299 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M60.0015 150H0C0 67.1573 66.7125 0 149.007 0C231.301 0 298.013 67.1573 298.013 150H237.998C237.999 149.833 238 149.667 238 149.5C238 102.832 198.153 65 149 65C99.8467 65 60 102.832 60 149.5C60 149.667 60.0005 149.833 60.0015 150Z" fill="#52ABEC"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M60.0015 150H0C0 232.843 66.7125 300 149.007 300C231.301 300 298.013 232.843 298.013 150H237.998C237.999 150.167 238 150.333 238 150.5C238 197.168 198.153 235 149 235C99.8467 235 60 197.168 60 150.5C60 150.333 60.0005 150.167 60.0015 150Z" fill="#F2AB22"/>
-                            <rect x="233" y="115" width="23" height="13" fill="black"/>
-                            <rect x="50" y="89" width="23" height="13" fill="black"/>
-                            <rect x="222" y="89" width="23" height="13" fill="black"/>
-                            <rect x="39" y="115" width="23" height="13" fill="black"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M127.307 145C126.46 147.512 126 150.202 126 153C126 166.807 137.193 178 151 178C164.807 178 176 166.807 176 153C176 150.202 175.54 147.512 174.693 145H170.422C171.439 147.466 172 150.167 172 153C172 164.598 162.598 174 151 174C139.402 174 130 164.598 130 153C130 150.167 130.561 147.466 131.578 145H127.307Z" fill="black"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M137.013 146H61V150H138.112C137.471 148.763 137.087 147.415 137.013 146ZM163.888 150H239V146H164.987C164.913 147.415 164.529 148.763 163.888 150Z" fill="black"/>
-                            </svg>
+                        <svg width="299" height="300" viewBox="0 0 299 300" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M60.0015 150H0C0 67.1573 66.7125 0 149.007 0C231.301 0 298.013 67.1573 298.013 150H237.998C237.999 149.833 238 149.667 238 149.5C238 102.832 198.153 65 149 65C99.8467 65 60 102.832 60 149.5C60 149.667 60.0005 149.833 60.0015 150Z"
+                                fill="#52ABEC" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M60.0015 150H0C0 232.843 66.7125 300 149.007 300C231.301 300 298.013 232.843 298.013 150H237.998C237.999 150.167 238 150.333 238 150.5C238 197.168 198.153 235 149 235C99.8467 235 60 197.168 60 150.5C60 150.333 60.0005 150.167 60.0015 150Z"
+                                fill="#F2AB22" />
+                            <rect x="233" y="115" width="23" height="13" fill="black" />
+                            <rect x="50" y="89" width="23" height="13" fill="black" />
+                            <rect x="222" y="89" width="23" height="13" fill="black" />
+                            <rect x="39" y="115" width="23" height="13" fill="black" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M127.307 145C126.46 147.512 126 150.202 126 153C126 166.807 137.193 178 151 178C164.807 178 176 166.807 176 153C176 150.202 175.54 147.512 174.693 145H170.422C171.439 147.466 172 150.167 172 153C172 164.598 162.598 174 151 174C139.402 174 130 164.598 130 153C130 150.167 130.561 147.466 131.578 145H127.307Z"
+                                fill="black" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M137.013 146H61V150H138.112C137.471 148.763 137.087 147.415 137.013 146ZM163.888 150H239V146H164.987C164.913 147.415 164.529 148.763 163.888 150Z"
+                                fill="black" />
+                        </svg>
                     </g>
                 </svg>
             </td>
-             <td>
+            <td>
                 <img src="altimeter.png" width="200" height="200">
             </td>
             <td style="vertical-align: top;">
@@ -191,19 +312,19 @@
         <tr>
             <td>
                 <pre id="airspeed" style="text-align: center">airspeed</pre>
-           </td>
+            </td>
             <td>
                 <pre id="pitch_roll" style="text-align: center">pitch_roll</pre>
             </td>
             <td>
                 <pre id="altitude" style="text-align: center">altitude</pre>
             </td>
- 
+
         </tr>
         <tr>
             <td>
                 <pre id="airspeedDelta" style="text-align: center">airspeed delta</pre>
-           </td>
+            </td>
             <td>
                 <pre id="pitch_rollDelta" style="text-align: center">pitch_roll delta</pre>
             </td>
