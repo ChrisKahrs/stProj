@@ -68,18 +68,29 @@
 
             pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
-            airspeedDelta.innerText = "del::" + (jsonData['state']['aircraftSpeed'].toFixed(3) / jsonData['state']['targetSpeed'].toFixed(3));
+            
+            airspeedDeltaNum = (jsonData['state']['aircraftSpeed'].toFixed(3) / jsonData['state']['targetSpeed'].toFixed(3));
+            airspeedDeltaPercent = (airspeedDeltaNum / jsonData['state']['targetSpeed'].toFixed(3)) * 100;
+            airspeedDelta.innerText = "delta:" + airspeedDeltaNum.toFixed(3) + " (" + airspeedDeltaPercent + "%)";
+
+            if (airspeedDeltaPercent > 10) {
+                airspeedDelta.style.color = "red";
+            }
+            else {
+                airspeedDelta.style.color = "black";
+            };
+ 
             altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(3) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(3);
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            }, 4);
+            },2);
             jsonActionString = JSON.stringify(jsonData['action'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            }, 4);
+            }, 2);
             jsonRewardString = jsonData['meta']['reward'];
 
             // Update the code block and positions of graphical elements 
