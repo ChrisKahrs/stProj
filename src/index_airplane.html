@@ -68,11 +68,11 @@
 
             pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
             
-            // air speed calculations
+            // airspeed calculations
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
-            airspeedDeltaNum = (jsonData['state']['aircraftSpeed'].toFixed(3) - jsonData['state']['targetSpeed'].toFixed(3));
-            airspeedDeltaPercent = (airspeedDeltaNum / jsonData['state']['targetSpeed'].toFixed(3)) * 100;
-            airspeedDelta.innerText = "delta:" + airspeedDeltaNum.toFixed(3) + " (" + airspeedDeltaPercent + "%)";
+            airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
+            airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(3);;
+            airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
             if (airspeedDeltaPercent > 10) {
                 airspeedDelta.style.color = "red";
             }
@@ -80,10 +80,11 @@
                 airspeedDelta.style.color = "black";
             };
  
-            altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(3) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(3);
-            altitudeDeltaNum = (parseFloat(jsonData['state']['aircraftAltitude']) - parseFloat(jsonData['state']['targetAltitude'])) * 100;
-            altitudeDeltaPercent = (altitudeDeltaNum / parseFloat(jsonData['state']['targetAltitude'])) * 100;
-            altitudeDelta.innerText = "delta:" + altitudeDeltaNum.toFixed(3) + " (" + altitudeDeltaPercent + "%)";
+            // altitude calculations
+            altitude.innerText = "act:" + jsonData['state']['aircraftAltitude'].toFixed(3) + " / tar: " + jsonData['state']['targetAltitude'].toFixed(3);
+            altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
+            altitudeDeltaPercent = ((altitudeDeltaNum / parseFloat(jsonData['state']['targetAltitude'])) * 100).toFixed(3);
+            altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
             if (altitudeDeltaPercent > 10) {
                 altitudeDelta.style.color = "red";
             }
