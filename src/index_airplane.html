@@ -49,9 +49,10 @@
             const jsonActionBox = document.getElementById('jsonActionBox');
             const jsonRewardBox = document.getElementById('jsonRewardBox');
             const airspeed = document.getElementById('airspeed');
+            const airspeedDelta = document.getElementById('airspeedDelta');
             const altitude = document.getElementById('altitude');
             const pitch_roll = document.getElementById('pitch_roll');
-            const bgImg = document.getElementById('bgImg')
+            const bgImg = document.getElementById('bgImg');
 
             // Grab the message data 
             var jsonData = JSON.parse(event.data);
@@ -64,8 +65,10 @@
             roll_angle = jsonData['state']['aircraftRoll'] * 180 / Math.PI
             bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
 
+
             pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
+            airspeedDelta.innerText = "del::" + (jsonData['state']['aircraftSpeed'].toFixed(3) / jsonData['state']['targetSpeed'].toFixed(3));
             altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(3) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(3);
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
                 if (v instanceof Array)
@@ -153,27 +156,38 @@
                     </g>
                 </svg>
             </td>
-             <td width="20%">
+             <td>
                 <img src="altimeter.png" width="200" height="200">
             </td>
-            <td width="20%" style="vertical-align: top;">
+            <td style="vertical-align: top;">
                 <pre id="jsonActionBox">Waiting...</pre>
             </td>
-            <td width="20%">
-                <pre id="jsonRewardBox" style="display: box;">Waiting...</pre>
+            <td style="vertical-align: top;">
+                <pre id="jsonRewardBox"></pre>
             </td>
         </tr>
         <tr>
-            <td width="20%">
-                <pre id="airspeed" style="text-align: center">a</pre>
+            <td>
+                <pre id="airspeed" style="text-align: center">airspeed</pre>
            </td>
-            <td width="20%">
-                <pre id="pitch_roll" style="text-align: center">b</pre>
+            <td>
+                <pre id="pitch_roll" style="text-align: center">pitch_roll</pre>
             </td>
-            <td width="20%">
-                <pre id="altitude" style="text-align: center">c</pre>
+            <td>
+                <pre id="altitude" style="text-align: center">altitude</pre>
             </td>
  
+        </tr>
+        <tr>
+            <td>
+                <pre id="airspeedDelta" style="text-align: center">airspeed delta</pre>
+           </td>
+            <td>
+                <pre id="pitch_rollDelta" style="text-align: center">pitch_roll delta</pre>
+            </td>
+            <td>
+                <pre id="altitudeDelta" style="text-align: center">altitude delta</pre>
+            </td>
         </tr>
     </table>
 </body>
