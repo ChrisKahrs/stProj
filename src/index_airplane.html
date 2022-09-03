@@ -73,7 +73,7 @@
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
             airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(3);;
             airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
-            if (airspeedDeltaPercent > 10) {
+            if (Math.abs(airspeedDeltaPercent) > 10) {
                 airspeedDelta.style.color = "red";
             }
             else {
@@ -85,7 +85,7 @@
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
             altitudeDeltaPercent = ((altitudeDeltaNum / parseFloat(jsonData['state']['targetAltitude'])) * 100).toFixed(3);
             altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
-            if (altitudeDeltaPercent > 10) {
+            if (Math.abs(altitudeDeltaPercent) > 10) {
                 altitudeDelta.style.color = "red";
             }
             else {
