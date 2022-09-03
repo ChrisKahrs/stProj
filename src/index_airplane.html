@@ -45,7 +45,7 @@
         // }
 
         function updateVisualizer() {
-            const jsonStateBox = document.getElementById('jsonStateBox');
+            // const jsonStateBox = document.getElementById('jsonStateBox');
             const jsonActionBox = document.getElementById('jsonActionBox');
             const jsonRewardBox = document.getElementById('jsonRewardBox');
             const airspeed = document.getElementById('airspeed');
@@ -80,7 +80,7 @@
             jsonRewardString = jsonData['meta']['reward'];
 
             // Update the code block and positions of graphical elements 
-            jsonStateBox.textContent = jsonStateString;
+            // jsonStateBox.textContent = jsonStateString;
             jsonActionBox.textContent = jsonActionString;
             jsonRewardBox.textContent = jsonRewardString;
         }
@@ -157,10 +157,10 @@
                 <img src="altimeter.png" width="200" height="200">
             </td>
             <td width="20%">
-                <pre id="jsonActionBox" style="display: box; vertical-align: top;">Waiting...</pre>
+                <pre id="jsonActionBox" style="display: box;">Waiting...</pre>
             </td>
             <td width="20%">
-                <pre id="jsonRewardBox" style="display: box; vertical-align: top;">Waiting...</pre>
+                <pre id="jsonRewardBox" style="display: box;">Waiting...</pre>
             </td>
         </tr>
         <tr>
