@@ -59,13 +59,15 @@
             const tenThousandElement = document.getElementById("tenThousand_hand");
             const hundredElement = document.getElementById("hundred_hand");
 
-
-
-            // thousandElement.setAttribute("transform", `rotate(${(360 / 12) * hour})`);
-            // hundredElement.setAttribute("transform", `rotate(${(360 / 60) * minute})`);
-            // tenThousandElement.setAttribute("transform", `rotate(${(360 / 60) * second})`);
-            // Grab the message data 
             var jsonData = JSON.parse(event.data);
+
+            thousands = (altitude / 1000) % 10;
+            tenThousands = (altitude / 10000) % 10;
+            hundreds = (altitude / 100000) % 10;
+
+            thousandElement.setAttribute("transform", `rotate(${(360 / 100) * (altitude / 1000)})`);
+            // hundredElement.setAttribute("transform", `rotate(${(360 / 100) * (altitude % 100)))`);
+            // tenThousandElement.setAttribute("transform", `rotate(${(360 / 100) * second})`);
 
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
@@ -80,7 +82,7 @@
             // airspeed calculations
             airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
-            airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(3);;
+            airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(1);;
             airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
             if (Math.abs(airspeedDeltaPercent) > 10) {
                 airspeedDelta.style.color = "red";
@@ -92,7 +94,7 @@
             // altitude calculations
             altitude.innerText = "act:" + jsonData['state']['aircraftAltitude'].toFixed(3) + " / tar: " + jsonData['state']['targetAltitude'].toFixed(3);
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
-            altitudeDeltaPercent = ((altitudeDeltaNum / parseFloat(jsonData['state']['targetAltitude'])) * 100).toFixed(3);
+            altitudeDeltaPercent = (altitudeDeltaNum / (jsonData['state']['targetAltitude'] * 100)).toFixed(1);
             altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
             if (Math.abs(altitudeDeltaPercent) > 10) {
                 altitudeDelta.style.color = "red";
@@ -235,9 +237,9 @@
             <th>REWARD</th>
         </tr>
         <tr>
-            <td width="20%" style="vertical-align: center; align-content: center;">
+            <td>
                 <!-- <img src="airspeed.png" width="200" height="200"> -->
-                <svg width="200" height="200" viewBox="-100 -100 200 200">
+                <svg id="altimeter" width="200" height="200" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
                     <circle class="minor_marker" r="90" pathLength="100" />
                     <circle class="major_marker" r="90" pathLength="100" />
                     <text id="text" class="text" x="45" y="5"></text>
@@ -258,9 +260,8 @@
 
                     <circle class="center" r="3" />
                 </svg>
-
             </td>
-            <td width="20%">
+            <td>
                 <svg id="svgroot" width="200" height="200" viewBox="0 0 325 325" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g id="bgImg">
