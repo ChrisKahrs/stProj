@@ -50,6 +50,7 @@
             const jsonRewardBox = document.getElementById('jsonRewardBox');
             const airspeed = document.getElementById('airspeed');
             const airspeedDelta = document.getElementById('airspeedDelta');
+            const altitudeDelta = document.getElementById('altitudeDelta');
             const altitude = document.getElementById('altitude');
             const pitch_roll = document.getElementById('pitch_roll');
             const bgImg = document.getElementById('bgImg');
@@ -65,14 +66,13 @@
             roll_angle = jsonData['state']['aircraftRoll'] * 180 / Math.PI
             bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
 
-
             pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
-            airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
             
-            airspeedDeltaNum = (jsonData['state']['aircraftSpeed'].toFixed(3) / jsonData['state']['targetSpeed'].toFixed(3));
+            // air speed calculations
+            airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
+            airspeedDeltaNum = (jsonData['state']['aircraftSpeed'].toFixed(3) - jsonData['state']['targetSpeed'].toFixed(3));
             airspeedDeltaPercent = (airspeedDeltaNum / jsonData['state']['targetSpeed'].toFixed(3)) * 100;
             airspeedDelta.innerText = "delta:" + airspeedDeltaNum.toFixed(3) + " (" + airspeedDeltaPercent + "%)";
-
             if (airspeedDeltaPercent > 10) {
                 airspeedDelta.style.color = "red";
             }
@@ -81,6 +81,16 @@
             };
  
             altitude.innerText = "act:" + parseFloat(jsonData['state']['aircraftAltitude']).toFixed(3) + " / tar: " + parseFloat(jsonData['state']['targetAltitude']).toFixed(3);
+            altitudeDeltaNum = (parseFloat(jsonData['state']['aircraftAltitude']) - parseFloat(jsonData['state']['targetAltitude'])) * 100;
+            altitudeDeltaPercent = (altitudeDeltaNum / parseFloat(jsonData['state']['targetAltitude'])) * 100;
+            altitudeDelta.innerText = "delta:" + altitudeDeltaNum.toFixed(3) + " (" + altitudeDeltaPercent + "%)";
+            if (altitudeDeltaPercent > 10) {
+                altitudeDelta.style.color = "red";
+            }
+            else {
+                altitudeDelta.style.color = "black";
+            };
+            
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
