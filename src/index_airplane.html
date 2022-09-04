@@ -76,7 +76,7 @@
             tenThousandElement.setAttribute("transform", `rotate(${(360 / 10) * tenThousands})`);
             hundredElement.setAttribute("transform", `rotate(${(360 / 10) * hundreds})`);
 
-            speedElement.setAttribute("transform", `rotate(${(360 / 100) * (speed / 2.5)}, 109,104)`);
+            speedElement.setAttribute("transform", `rotate(${(360 / 100) * (speed / 2.4)}, 109,104)`);
 
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
@@ -86,13 +86,14 @@
             roll_angle = jsonData['state']['aircraftRoll'] * 180 / Math.PI
             bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
 
-            pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
+            pitch.innerText = "Pitch: " + (pitch_angle).toFixed(3);
+            roll.innerText = "Roll: " + (roll_angle).toFixed(3);
 
             // airspeed calculations
             airspeed.innerText = "Actual:" + jsonData['state']['aircraftSpeed'].toFixed(3);
             airspeedTarget.innerText = "Target:" + jsonData['state']['targetSpeed'].toFixed(3);
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
-            airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(1);
+            airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(0);
             airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
             if (Math.abs(airspeedDeltaPercent) > 10) {
                 airspeedDelta.style.color = "red";
@@ -105,7 +106,7 @@
             altitude.innerText = "Actual:" + jsonData['state']['aircraftAltitude'].toFixed(3);
             altitudeTarget.innerText = "Target:" + jsonData['state']['targetAltitude'].toFixed(3);
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
-            altitudeDeltaPercent = ((altitudeDeltaNum / jsonData['state']['targetAltitude']) * 100).toFixed(1);
+            altitudeDeltaPercent = ((altitudeDeltaNum / jsonData['state']['targetAltitude']) * 100).toFixed(0);
             altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
             if (Math.abs(altitudeDeltaPercent) > 10) {
                 altitudeDelta.style.color = "red";
@@ -320,7 +321,7 @@
                 <pre id="airspeed" style="text-align: center">airspeed</pre>
             </td>
             <td>
-                <pre id="pitch_roll" style="text-align: center">pitch_roll</pre>
+                <pre id="pitch" style="text-align: center">pitch</pre>
             </td>
             <td>
                 <pre id="altitude" style="text-align: center">altitude</pre>
@@ -332,7 +333,7 @@
                 <pre id="airspeedTarget" style="text-align: center">airspeed delta</pre>
             </td>
             <td>
-                <pre id="pitch_rollTarget" style="text-align: center">pitch_roll delta</pre>
+                <pre id="roll" style="text-align: center">roll</pre>
             </td>
             <td>
                 <pre id="altitudeTarget" style="text-align: center">altitude delta</pre>
@@ -349,6 +350,16 @@
                 <pre id="altitudeDelta" style="text-align: center">altitude delta</pre>
             </td>
         </tr>
+        <tr>
+            <td>
+                <img src="TurnCoordinator.png" width="150" height="150">
+            </td>
+            <td>
+                <img src="HeadingIndicator.png" width="150" height="150">
+            </td>
+            <td>
+                <img src="VerticalSpeed.png" width="150" height="150">
+            </td>
     </table>
 
     <br><br><br><br>
