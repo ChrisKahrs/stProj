@@ -90,7 +90,7 @@
 
             // airspeed calculations
             airspeed.innerText = "Actual:" + jsonData['state']['aircraftSpeed'].toFixed(3);
-            airspeedTarget.innerText = "Target:" + jsonData['state']['airspeedTarget'].toFixed(3);
+            airspeedTarget.innerText = "Target:" + jsonData['state']['targetSpeed'].toFixed(3);
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
             airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(1);
             airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
@@ -103,7 +103,7 @@
 
             // altitude calculations
             altitude.innerText = "Actual:" + jsonData['state']['aircraftAltitude'].toFixed(3);
-            altitudeTarget.innerText = "Target:" + jsonData['state']['altitudeTarget'].toFixed(3);
+            altitudeTarget.innerText = "Target:" + jsonData['state']['targetAltitude'].toFixed(3);
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
             altitudeDeltaPercent = ((altitudeDeltaNum / jsonData['state']['targetAltitude']) * 100).toFixed(1);
             altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
