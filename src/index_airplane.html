@@ -63,9 +63,9 @@
             var jsonData = JSON.parse(event.data);
 
             height = jsonData['state']['aircraftAltitude']
-            tenThousands = (height / 10000);
-            thousands = (height / 1000);
-            hundreds = (height / 100);
+            tenThousands = (height % 100000 / 10000);
+            thousands = (height % 10000/ 1000);
+            hundreds = (height % 1000 / 100);
 
             thousandElement.setAttribute("transform", `rotate(${(360 / 10) * thousands})`);
             tenThousandElement.setAttribute("transform", `rotate(${(360 / 10) * tenThousands})`);
@@ -121,8 +121,8 @@
             jsonStateBox2.textContent = jsonStateString;
             jsonActionBox2.textContent = jsonActionString;
             jsonRewardBox2.textContent = jsonRewardString;
-            jsonActionBox1.textContent = jsonActionString;
-            jsonRewardBox1.textContent = jsonRewardString;
+            jsonActionBox.textContent = jsonActionString;
+            jsonRewardBox.textContent = jsonRewardString;
         }
 
     </script>
