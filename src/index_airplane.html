@@ -90,11 +90,11 @@
             roll.innerText = "Roll: " + (roll_angle).toFixed(3);
 
             // airspeed calculations
-            airspeed.innerText = "Actual:" + jsonData['state']['aircraftSpeed'].toFixed(3);
-            airspeedTarget.innerText = "Target:" + jsonData['state']['targetSpeed'].toFixed(3);
+            airspeed.innerText = "Actual: " + jsonData['state']['aircraftSpeed'].toFixed(3);
+            airspeedTarget.innerText = "Target: " + jsonData['state']['targetSpeed'].toFixed(3);
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
             airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(0);
-            airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
+            airspeedDelta.innerText = "Delta: " + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
             if (Math.abs(airspeedDeltaPercent) > 10) {
                 airspeedDelta.style.color = "red";
             }
@@ -103,11 +103,11 @@
             };
 
             // altitude calculations
-            altitude.innerText = "Actual:" + jsonData['state']['aircraftAltitude'].toFixed(3);
-            altitudeTarget.innerText = "Target:" + jsonData['state']['targetAltitude'].toFixed(3);
+            altitude.innerText = "Actual: " + jsonData['state']['aircraftAltitude'].toFixed(3);
+            altitudeTarget.innerText = "Target: " + jsonData['state']['targetAltitude'].toFixed(3);
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
             altitudeDeltaPercent = ((altitudeDeltaNum / jsonData['state']['targetAltitude']) * 100).toFixed(0);
-            altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
+            altitudeDelta.innerText = "Delta: " + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
             if (Math.abs(altitudeDeltaPercent) > 10) {
                 altitudeDelta.style.color = "red";
             }
