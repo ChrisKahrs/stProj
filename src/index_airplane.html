@@ -60,7 +60,9 @@
             const tenThousandElement = document.getElementById("tenThousand_hand");
             const hundredElement = document.getElementById("hundred_hand");
             const speedElement = document.getElementById("speed_hand");
-
+            const airspeedTarget = document.getElementById("airspeedTarget");
+            const altitudeTarget = document.getElementById("altitudeTarget");
+            
             var jsonData = JSON.parse(event.data);
 
             height = jsonData['state']['aircraftAltitude']
@@ -74,7 +76,7 @@
             tenThousandElement.setAttribute("transform", `rotate(${(360 / 10) * tenThousands})`);
             hundredElement.setAttribute("transform", `rotate(${(360 / 10) * hundreds})`);
 
-            speedElement.setAttribute("transform", `rotate(${(360 / 10) * (speed * 4)}, 109,104)`);
+            speedElement.setAttribute("transform", `rotate(${(360 / 10) * (speed)}, 109,104)`);
 
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
@@ -87,7 +89,8 @@
             pitch_roll.innerText = "pit: " + (pitch_angle).toFixed(3) + " . rol: " + (roll_angle).toFixed(3);
 
             // airspeed calculations
-            airspeed.innerText = "act:" + jsonData['state']['aircraftSpeed'].toFixed(3) + " / tar: " + jsonData['state']['targetSpeed'].toFixed(3);
+            airspeed.innerText = "Actual:" + jsonData['state']['aircraftSpeed'].toFixed(3);
+            airspeedTarget.innerText = "Target:" + jsonData['state']['airspeedTarget'].toFixed(3);
             airspeedDeltaNum = (jsonData['state']['aircraftSpeed'] - jsonData['state']['targetSpeed']).toFixed(3);
             airspeedDeltaPercent = ((airspeedDeltaNum / jsonData['state']['targetSpeed']) * 100).toFixed(1);
             airspeedDelta.innerText = "delta:" + airspeedDeltaNum + " (" + airspeedDeltaPercent + "%)";
@@ -99,7 +102,8 @@
             };
 
             // altitude calculations
-            altitude.innerText = "act:" + jsonData['state']['aircraftAltitude'].toFixed(3) + " / tar: " + jsonData['state']['targetAltitude'].toFixed(3);
+            altitude.innerText = "Actual:" + jsonData['state']['aircraftAltitude'].toFixed(3);
+            altitudeTarget.innerText = "Target:" + jsonData['state']['altitudeTarget'].toFixed(3);
             altitudeDeltaNum = (jsonData['state']['aircraftAltitude'] - jsonData['state']['targetAltitude']).toFixed(3);
             altitudeDeltaPercent = ((altitudeDeltaNum / jsonData['state']['targetAltitude']) * 100).toFixed(1);
             altitudeDelta.innerText = "delta:" + altitudeDeltaNum + " (" + altitudeDeltaPercent + "%)";
@@ -209,8 +213,7 @@
 </head>
 
 <body>
-    <center>General Visualizer! Instructions to create a full featured one with dynamic svg manipulation:<br>
-        https://docs.microsoft.com/en-us/bonsai/tutorials/visualizer-plugin </center>
+    <center><b>Pilot 6-Pack Visualizer!</b></center>
 
     <table fill="grey">
         <tr>
@@ -325,6 +328,17 @@
         </tr>
         <tr>
             <td>
+                <pre id="airspeedTarget" style="text-align: center">airspeed delta</pre>
+            </td>
+            <td>
+                <pre id="pitch_rollTarget" style="text-align: center">pitch_roll delta</pre>
+            </td>
+            <td>
+                <pre id="altitudeTarget" style="text-align: center">altitude delta</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <pre id="airspeedDelta" style="text-align: center">airspeed delta</pre>
             </td>
             <td>
@@ -338,7 +352,7 @@
 
     <br><br><br><br>
 
-    <table width="100%">
+    <table>
         <tr>
             <th width="40%">STATE</th>
             <th width="40%">ACTION</th>
