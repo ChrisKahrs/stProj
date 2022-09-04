@@ -67,7 +67,7 @@
             thousands = (height / 1000);
             hundreds = (height / 100);
 
-            thousandElement.setAttribute("transform", `rotate(${(360 / 100) * thousands})`);
+            thousandElement.setAttribute("transform", `rotate(${(360 / 10) * thousands})`);
             tenThousandElement.setAttribute("transform", `rotate(${(360 / 10) * tenThousands})`);
             hundredElement.setAttribute("transform", `rotate(${(360 / 10) * hundreds})`);
 
@@ -175,6 +175,10 @@
         .hand-thick {
             stroke-width: 7;
         }
+        
+        .hand-thick2 {
+            stroke-width: 12;
+        }
 
         .hand-tenThousand {
             stroke: green;
@@ -265,7 +269,7 @@
 
                     <g id="thousand_hand">
                         <line class="hand" x1="0" y1="0" x2="0" y2="-50" />
-                        <line class="hand hand-thousand hand-thick" x1="0" y1="-12" x2="0" y2="-50" />
+                        <line class="hand hand-thousand hand-thick hand-thick2" x1="0" y1="-12" x2="0" y2="-50" />
                     </g>
 
                     <g id="tenThousand_hand">
