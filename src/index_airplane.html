@@ -187,11 +187,12 @@
         .center {
             fill: transparent;
             stroke-width: 2;
-            stroke: white;
+            stroke: black;
         }
 
         .text {
-            fill: #f0f0c9;
+            fill: black;
+            font-size:larger;
             font-family: "Roboto", sans-serif;
             text-anchor: middle;
             cursor: pointer;
@@ -204,7 +205,7 @@
     <center>General Visualizer! Instructions to create a full featured one with dynamic svg manipulation:<br>
         https://docs.microsoft.com/en-us/bonsai/tutorials/visualizer-plugin </center>
 
-    <table width="100%" fill="lightgrey">
+    <table width="100%" fill="grey">
         <tr>
             <th width="20%">AirSpeed Indicator</th>
             <th width="20%">Artificial Horizon</th>
@@ -260,8 +261,16 @@
                 <svg id="altimeter" width="200" height="200" viewBox="-100 -100 200 200" fill="grey" xmlns="http://www.w3.org/2000/svg">
                     <circle class="minor_marker" r="90" pathLength="100" />
                     <circle class="major_marker" r="90" pathLength="100" />
-                    <text id="text" class="text" x="45" y="5"></text>
-
+                    <text id="text" class="text" x="0" y="-70">0</text>
+                    <text id="text" class="text" x="45" y="-55">1</text>
+                    <text id="text" class="text" x="73" y="-18">2</text>
+                    <text id="text" class="text" x="73" y="33">3</text>
+                    <text id="text" class="text" x="45" y="65">4</text>
+                    <text id="text" class="text" x="0" y="80">5</text>
+                    <text id="text" class="text" x="-45" y="65">6</text>
+                    <text id="text" class="text" x="-73" y="33">7</text>
+                    <text id="text" class="text" x="-73" y="-18">8</text>
+                    <text id="text" class="text" x="-45" y="-55">9</text>
                     <g id="hundred_hand">
                         <line class="hand" x1="0" y1="0" x2="0" y2="-80" />
                         <line class="hand hand-hundred hand-thick" x1="0" y1="-12" x2="0" y2="-80" />
