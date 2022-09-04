@@ -62,9 +62,10 @@
 
             var jsonData = JSON.parse(event.data);
 
-            tenThousands = (altitude / 10000);
-            thousands = (altitude / 1000);
-            hundreds = (altitude / 100);
+            height = jsonData['state']['aircraftAltitude']
+            tenThousands = (height / 10000);
+            thousands = (height / 1000);
+            hundreds = (height / 100);
 
             thousandElement.setAttribute("transform", `rotate(${(360 / 100) * thousands})`);
             tenThousandElement.setAttribute("transform", `rotate(${(360 / 10) * tenThousands})`);
