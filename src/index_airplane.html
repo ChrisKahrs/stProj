@@ -118,9 +118,9 @@
             jsonRewardString = jsonData['meta']['reward'];
 
             // Update the code block and positions of graphical elements 
-            // jsonStateBox.textContent = jsonStateString;
-            jsonActionBox.textContent = jsonActionString;
-            jsonRewardBox.textContent = jsonRewardString;
+            jsonStateBox2.textContent = jsonStateString;
+            jsonActionBox2.textContent = jsonActionString;
+            jsonRewardBox2.textContent = jsonRewardString;
         }
 
     </script>
@@ -177,7 +177,7 @@
         }
         
         .hand-thick2 {
-            stroke-width: 12;
+            stroke-width: 14;
         }
 
         .hand-tenThousand {
@@ -319,13 +319,13 @@
         </tr>
         <tr>
             <td width="40%">
-                <pre id="jsonStateBox" style="display: box;">Waiting...</pre>
+                <pre id="jsonStateBox2" style="display: box; vertical-align: top;">Waiting...</pre>
             </td>
             <td width="40%">
-                <pre id="jsonActionBox" style="display: box; vertical-align: top;">Waiting...</pre>
+                <pre id="jsonActionBox2" style="display: box; vertical-align: top;">Waiting...</pre>
             </td>
             <td>
-                <pre id="jsonRewardBox" style="display: box; vertical-align: top;">Waiting...</pre>
+                <pre id="jsonRewardBox2" style="display: box; vertical-align: top;">Waiting...</pre>
             </td>
         </tr>
     </table>
