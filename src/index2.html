@@ -73,11 +73,13 @@
             jsonStateBox.textContent = jsonStateString;
             jsonActionBox.textContent = jsonActionString;
             jsonRewardBox.textContent = jsonRewardString;
-            if (typeof jsonDataOld != "undefined") {
-                jsonStateBoxDiff.textContent = compareJSON(jsonDataOld['state'], jsonData['state']);
-                jsonActionBoxDiff.textContent = compareJSON(jsonDataOld['action'], jsonData['action']);
-                jsonRewardBoxDiff.textContent = compareJSON(jsonData['meta']['reward'], jsonDataOld['meta']['reward']);
-            }
+            if (typeof jsonDataOld['state'] == "undefined") {
+                jsonDataOld = jsonData
+            };
+            jsonStateBoxDiff.textContent = compareJSON(jsonDataOld['state'], jsonData['state']);
+            jsonActionBoxDiff.textContent = compareJSON(jsonDataOld['action'], jsonData['action']);
+            jsonRewardBoxDiff.textContent = compareJSON(jsonData['meta']['reward'], jsonDataOld['meta']['reward']);
+
 
             jsonDataOld = JSON.parse(JSON.stringify(jsonData));
         }
