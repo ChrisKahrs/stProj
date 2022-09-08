@@ -57,6 +57,9 @@
             // Grab the message data 
             var jsonData = JSON.parse(event.data);
 
+            if (typeof jsonDataOld['state'] == "undefined") {
+                jsonDataOld = jsonData
+            };
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
             jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
@@ -95,9 +98,6 @@
             jsonActionBox.textContent = jsonActionString;
             jsonRewardBox.textContent = jsonRewardString;
 
-            if (typeof jsonDataOld['state'] == "undefined") {
-                jsonDataOld = jsonData
-            };
             jsonStateBoxDiff.textContent = jsonPrevStateDiffString;
             jsonActionBoxDiff.textContent = jsonPrevActionDiffString;
             jsonRewardBoxDiff.textContent = jsonPrevRewardDiff;
