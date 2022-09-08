@@ -77,7 +77,7 @@
             jsonActionBoxDiff.textContent = compareJSON(jsonDataOld['action'], jsonData['action']);
             jsonRewardBoxDiff.textContent = compareJSON(jsonData['meta']['reward'], jsonDataOld['meta']['reward']);
 
-            jsonDataOld = jsonData;
+            jsonDataOld = JSON.parse(JSON.stringify(jsonData));
         }
 
     </script>
