@@ -71,16 +71,36 @@
             }, 4);
             jsonRewardString = jsonData['meta']['reward'];
 
+            jsonPrevStateDiff = compareJSON(jsonDataOld['state'], jsonData['state']);
+            jsonPrevActionDiff = compareJSON(jsonDataOld['action'], jsonData['action']);
+            jsonPrevRewardDiff = jsonDataOld['meta']['reward'] - jsonData['meta']['reward'];
+
+            jsonPrevStateDiffString = JSON.stringify(jsonPrevStateDiff, function (k, v) {
+                if (v instanceof Array)
+                    return JSON.stringify(v);
+                return v;
+            }, 4);
+    
+            jsonPrevActionDiffString = JSON.stringify(jsonPrevActionDiff, function (k, v) {
+                if (v instanceof Array)
+                    return JSON.stringify(v);
+                return v;
+            }, 4);
+
+            jsonPrevRewardDiffString = JSON.stringify(jsonPrevRewardDiff, null, 4);
+
+            // Compare the new state to the old state
             // Update the code block and positions of graphical elements 
             jsonStateBox.textContent = jsonStateString;
             jsonActionBox.textContent = jsonActionString;
             jsonRewardBox.textContent = jsonRewardString;
+
             if (typeof jsonDataOld['state'] == "undefined") {
                 jsonDataOld = jsonData
             };
-            jsonStateBoxDiff.textContent = JSON.stringify(compareJSON(jsonData['state'], jsonDataOld['state']),null, 4);
-            jsonActionBoxDiff.textContent = JSON.stringify(compareJSON(jsonData['action'], jsonDataOld['action']),null, 4);
-            jsonRewardBoxDiff.textContent = JSON.stringify(compareJSON(jsonData['meta']['reward'], jsonDataOld['meta']['reward']), null, 4);
+            jsonStateBoxDiff.textContent = jsonPrevStateDiffString;
+            jsonActionBoxDiff.textContent = jsonPrevActionDiffString;
+            jsonRewardBoxDiff.textContent = jsonPrevRewardDiff;
 
 
             jsonDataOld = JSON.parse(JSON.stringify(jsonData));
@@ -118,9 +138,9 @@
             </td>
         </tr>
         <tr>
-            <th>STATE OLD DIFF</th>
-            <th>ACTION OLD DIFF</th>
-            <th>REWARD OLD DIFF</th>
+            <th>PREV STATE DIFF</th>
+            <th>PREV ACTION DIFF</th>
+            <th>PREV REWARD DIFF</th>
         </tr>
         <tr>
             <td style="vertical-align: top;">
