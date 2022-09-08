@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>No Viz Visualizer</title>
+    <title>Table Visualizer</title>
 
     <script language="JavaScript">
         // Grab any URL parameters that were provided
@@ -73,9 +73,11 @@
             jsonStateBox.textContent = jsonStateString;
             jsonActionBox.textContent = jsonActionString;
             jsonRewardBox.textContent = jsonRewardString;
-            jsonStateBoxDiff.textContent = compareJSON(jsonDataOld['state'], jsonData['state']);
-            jsonActionBoxDiff.textContent = compareJSON(jsonDataOld['action'], jsonData['action']);
-            jsonRewardBoxDiff.textContent = compareJSON(jsonData['meta']['reward'], jsonDataOld['meta']['reward']);
+            if (typeof jsonDataOld != "undefined") {
+                jsonStateBoxDiff.textContent = compareJSON(jsonDataOld['state'], jsonData['state']);
+                jsonActionBoxDiff.textContent = compareJSON(jsonDataOld['action'], jsonData['action']);
+                jsonRewardBoxDiff.textContent = compareJSON(jsonData['meta']['reward'], jsonDataOld['meta']['reward']);
+            }
 
             jsonDataOld = JSON.parse(JSON.stringify(jsonData));
         }
