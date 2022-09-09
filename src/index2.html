@@ -58,7 +58,7 @@
             var jsonData = JSON.parse(event.data);
 
             if (typeof jsonDataOld['state'] == "undefined") {
-                jsonDataOld = jsonData
+                jsonDataOld = JSON.parse(JSON.stringify(jsonData));
             };
             // Convert message to formatted JSON text for display 
             // var jsonString = JSON.stringify(jsonData, null, 4);
@@ -66,23 +66,24 @@
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            }, 4);
+            }, 2);
             jsonActionString = JSON.stringify(jsonData['action'], function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            }, 4);
+            }, 2);
             jsonRewardString = jsonData['meta']['reward'];
 
-            jsonPrevStateDiff = compareJSON(jsonDataOld['state'], jsonData['state']);
-            jsonPrevActionDiff = compareJSON(jsonDataOld['action'], jsonData['action']);
-            jsonPrevRewardDiff = jsonDataOld['meta']['reward'] - jsonData['meta']['reward'];
+            jsonPrevStateDiff = compareJSON(jsonData['state'], jsonDataOld['state']);
+            jsonPrevActionDiff = compareJSON(jsonData['action'], jsonDataOld['action']);
+
+            jsonPrevRewardDiffString = jsonData['meta']['reward'] - jsonDataOld['meta']['reward'];
 
             jsonPrevStateDiffString = JSON.stringify(jsonPrevStateDiff, function (k, v) {
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            }, 4);
+            }, 2);
     
             jsonPrevActionDiffString = JSON.stringify(jsonPrevActionDiff, function (k, v) {
                 if (v instanceof Array)
@@ -90,8 +91,7 @@
                 return v;
             }, 4);
 
-            jsonPrevRewardDiffString = JSON.stringify(jsonPrevRewardDiff, null, 4);
-
+  
             // Compare the new state to the old state
             // Update the code block and positions of graphical elements 
             jsonStateBox.textContent = jsonStateString;
@@ -100,7 +100,7 @@
 
             jsonStateBoxDiff.textContent = jsonPrevStateDiffString;
             jsonActionBoxDiff.textContent = jsonPrevActionDiffString;
-            jsonRewardBoxDiff.textContent = jsonPrevRewardDiff;
+            jsonRewardBoxDiff.textContent = jsonPrevRewardDiffString;
 
 
             jsonDataOld = JSON.parse(JSON.stringify(jsonData));
