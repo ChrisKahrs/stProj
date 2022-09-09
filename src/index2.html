@@ -76,7 +76,7 @@
 
             jsonPrevStateDiff = compareJSON(jsonData['state'], jsonDataOld['state']);
             jsonPrevActionDiff = compareJSON(jsonData['action'], jsonDataOld['action']);
-
+            
             jsonPrevRewardDiffString = jsonData['meta']['reward'] - jsonDataOld['meta']['reward'];
 
             jsonPrevStateDiffString = JSON.stringify(jsonPrevStateDiff, function (k, v) {
@@ -89,7 +89,7 @@
                 if (v instanceof Array)
                     return JSON.stringify(v);
                 return v;
-            }, 4);
+            }, 2);
 
   
             // Compare the new state to the old state
