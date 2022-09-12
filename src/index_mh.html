@@ -66,11 +66,11 @@
 
             var dest = document.getElementsByClassName("destination");
             for (var i = 0; i < dest.length; i++) {
-                if (st.destination[oc] == 1) {
-                    dest[oc].innerHTML = "D" + str(oc) + "<br/>Open";
+                if (st.destination[i] == 1) {
+                    dest[i].innerHTML = "D" + str(i) + "<br/>Open";
                 }
                 else {
-                    dest[oc].innerHTML = "D" + str(oc) + "<br/>Closed";
+                    dest[i].innerHTML = "D" + str(i) + "<br/>Closed";
                 }
             }
 
