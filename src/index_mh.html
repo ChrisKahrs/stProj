@@ -67,37 +67,17 @@
             var dest = document.getElementsByClassName("destination");
             for (var i = 0; i < dest.length; i++) {
                 if (st.destination[i] == 1) {
-                    dest[i].innerHTML = "D" + i.toString() + "<br/>Open";
+                    dest[i].innerHTML = "D" + i.toString() + "<br/>1";
                 }
                 else {
-                    dest[i].innerHTML = "D" + i.toString() + "<br/>Closed";
+                    dest[i].innerHTML = "D" + i.toString() + "<br/>0";
                 }
-            }
+            };
+            var pall = document.getElementsByClassName("pallet");
+            for (var i = 0; i < pall.length; i++) {
+                    pall[i].innerHTML = "Dest: " + pall[i].toString();
 
-            // if (st.destination[0] == 1) {
-            //     d0.innerHTML = "D0<br/>Open";
-            // }
-            // else {
-            //     d0.innerHTML = "D0<br/>Closed";
-            // }
-            // if (st.destination[1] == 1) {
-            //     d0.innerHTML = "D1<br/>Open";
-            // }
-            // else {
-            //     d0.innerHTML = "D1<br/>Closed";
-            // }
-            // if (st.destination[2] == 1) {
-            //     d0.innerHTML = "D2<br/>Open";
-            // }
-            // else {
-            //     d0.innerHTML = "D2<br/>Closed";
-            // }
-            // if (st.destination[3] == 1) {
-            //     d0.innerHTML = "D3<br/>Open";
-            // }
-            // else {
-            //     d0.innerHTML = "D3<br/>Closed";
-            // }
+            }
 
         }
 
@@ -167,21 +147,21 @@
     <table>
         <tbody>
             <tr>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
-                <td id="palletReady">0</td>
+                <td id="P0" class="pallet">0</td>
+                <td id="P1" class="pallet">0</td>
+                <td id="P2" class="pallet">0</td>
+                <td id="P3" class="pallet">0</td>
+                <td id="P4" class="pallet">0</td>
+                <td id="P5" class="pallet">0</td>
+                <td id="P6" class="pallet">0</td>
+                <td id="P7" class="pallet">0</td>
+                <td id="P8" class="pallet">0</td>
+                <td id="P9" class="pallet">0</td>
+                <td id="P10" class="pallet">0</td>
+                <td id="P11" class="pallet">0</td>
+                <td id="P12" class="pallet">0</td>
+                <td id="P13" class="pallet">0</td>
+                <td id="P14" class="pallet">0</td>
             </tr>
             <tr>
                 <td></td>
