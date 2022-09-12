@@ -66,17 +66,11 @@
 
             var dest = document.getElementsByClassName("destination");
             for (var i = 0; i < dest.length; i++) {
-                if (st.destination[i] == 1) {
-                    dest[i].innerHTML = "D" + i.toString() + "<br/>1";
-                }
-                else {
-                    dest[i].innerHTML = "D" + i.toString() + "<br/>0";
-                }
+                dest[i].innerHTML = "D" + i.toString() + "<br/>" + st.destination[i].toString();
             };
             var pall = document.getElementsByClassName("pallet");
             for (var i = 0; i < pall.length; i++) {
-                    pall[i].innerHTML = "Dest: " + pall[i].toString();
-
+                pall[i].innerHTML = "Dest: " + pall[i].toString();
             }
 
         }
