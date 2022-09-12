@@ -67,10 +67,10 @@
             var dest = document.getElementsByClassName("destination");
             for (var i = 0; i < dest.length; i++) {
                 if (st.destination[i] == 1) {
-                    dest[i].innerHTML = "D" + str(i) + "<br/>Open";
+                    dest[i].innerHTML = "D" + i.toString() + "<br/>Open";
                 }
                 else {
-                    dest[i].innerHTML = "D" + str(i) + "<br/>Closed";
+                    dest[i].innerHTML = "D" + i.toString() + "<br/>Closed";
                 }
             }
 
