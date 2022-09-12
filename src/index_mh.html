@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Aircraft Visualizer</title>
+    <title>Material Handling Visualizer</title>
 
     <script language="JavaScript">
         // Grab any URL parameters that were provided
@@ -15,8 +15,6 @@
 
             // Add an event listener to catch messages from Bonsai
             window.addEventListener('message', updateVisualizer, false);
-            const bgImg = document.getElementById('bgImg')
-            bgImg.setAttribute("transform", "translate (50,50)");
         }
 
         // Run the init() function when the window loads
@@ -34,18 +32,8 @@
                 document.body.style.color = '#000';
             }
         }
-        // angle = 0;
-        // lift = 0;
-        // function updateVisualizer(liftx, rot) {
-        //     const bgImg = document.getElementById('bgImg');
-        //     angle += rot;
-        //     lift += liftx
-        //     let stringy = 'translate (50,' + (50 + lift) + ') rotate(' + (angle) + ',100,100)';
-        //     bgImg.setAttribute("transform", stringy);
-        // }
 
         function updateVisualizer() {
-            // const jsonStateBox = document.getElementById('jsonStateBox');
             const p0 = document.getElementById('p0');
             const p1 = document.getElementById('p1');
             const p2 = document.getElementById('p2');
@@ -64,18 +52,41 @@
             const s1 = document.getElementById('s1');
             const s2 = document.getElementById('s2');
 
+            const d0 = document.getElementById('d0');
             const d1 = document.getElementById('d1');
             const d2 = document.getElementById('d2');
             const d3 = document.getElementById('d3');
-            const d4 = document.getElementById('d4');
-
 
             var jsonData = JSON.parse(event.data);
+            st = jsonData.state;
+            ac = jsonData.action;
 
             // bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
-            // pitch.innerText = "Pitch: " + (pitch_angle).toFixed(3);
             // airspeedDelta.style.color = "red";
-
+            if (st.destination[0] == 1) {
+                d0.innerText = "D0<br/>Open";
+            }
+            else {
+                d0.innerText = "D0<br/>Closed";
+            }
+            if (st.destination[1] == 1) {
+                d0.innerText = "D1<br/>Open";
+            }
+            else {
+                d0.innerText = "D1<br/>Closed";
+            }
+            if (st.destination[2] == 1) {
+                d0.innerText = "D2<br/>Open";
+            }
+            else {
+                d0.innerText = "D2<br/>Closed";
+            }
+            if (st.destination[3] == 1) {
+                d0.innerText = "D3<br/>Open";
+            }
+            else {
+                d0.innerText = "D3<br/>Closed";
+            }
 
         }
 
@@ -115,6 +126,22 @@ th {
     font-size: 20px;
     font-weight: bold;
 }
+
+.destination {
+    background-color: #e61616;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reference {
+    background-color: #f8f6ef;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
     </style>
 </head>
 
@@ -122,8 +149,25 @@ th {
     <table>
         <tbody>
             <tr>
-                <td></td>
                 <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+                <td id="palletReady">0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td id="shuttleReady">Pick<br>D1</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -134,60 +178,43 @@ th {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td id="shuttleReady">Right</td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
-                <td id="shuttleReady">Pick</td>
+                <td id="d0" class="destination">D0<br>Open</td>
                 <td></td>
                 <td></td>
                 <td></td>
+                <td id="d1" class="destination">Open</td>
                 <td></td>
                 <td></td>
                 <td></td>
+                <td id="d2" class="destination">Closed</td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="d3" class="destination">Closed</td>
                 <td></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="reference">0</td>
+                <td class="reference">1</td>
+                <td class="reference">2</td>
+                <td class="reference">3</td>
+                <td class="reference">4</td>
+                <td class="reference">5</td>
+                <td class="reference">6</td>
+                <td class="reference">7</td>
+                <td class="reference">8</td>
+                <td class="reference">9</td>
+                <td class="reference">10</td>
+                <td class="reference">11</td>
+                <td class="reference">12</td>
+                <td class="reference">13</td>
+                <td class="reference">14</td>
             </tr>
         </tbody>
     </table>
