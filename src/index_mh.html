@@ -63,85 +63,103 @@
 
             // bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
             // airspeedDelta.style.color = "red";
-            if (st.destination[0] == 1) {
-                d0.innerText = "D0<br/>Open";
+
+            var dest = document.getElementsByClassName("destination");
+            for (var i = 0; i < dest.length; i++) {
+                if (st.destination[oc] == 1) {
+                    dest[oc].innerHTML = "D" + str(oc) + "<br/>Open";
+                }
+                else {
+                    dest[oc].innerHTML = "D" + str(oc) + "<br/>Closed";
+                }
             }
-            else {
-                d0.innerText = "D0<br/>Closed";
-            }
-            if (st.destination[1] == 1) {
-                d0.innerText = "D1<br/>Open";
-            }
-            else {
-                d0.innerText = "D1<br/>Closed";
-            }
-            if (st.destination[2] == 1) {
-                d0.innerText = "D2<br/>Open";
-            }
-            else {
-                d0.innerText = "D2<br/>Closed";
-            }
-            if (st.destination[3] == 1) {
-                d0.innerText = "D3<br/>Open";
-            }
-            else {
-                d0.innerText = "D3<br/>Closed";
-            }
+
+            // if (st.destination[0] == 1) {
+            //     d0.innerHTML = "D0<br/>Open";
+            // }
+            // else {
+            //     d0.innerHTML = "D0<br/>Closed";
+            // }
+            // if (st.destination[1] == 1) {
+            //     d0.innerHTML = "D1<br/>Open";
+            // }
+            // else {
+            //     d0.innerHTML = "D1<br/>Closed";
+            // }
+            // if (st.destination[2] == 1) {
+            //     d0.innerHTML = "D2<br/>Open";
+            // }
+            // else {
+            //     d0.innerHTML = "D2<br/>Closed";
+            // }
+            // if (st.destination[3] == 1) {
+            //     d0.innerHTML = "D3<br/>Open";
+            // }
+            // else {
+            //     d0.innerHTML = "D3<br/>Closed";
+            // }
 
         }
 
     </script>
     <style>
-table , td, th {
-	border: 3px solid #595959;
-	border-collapse: collapse;
-}
-td, th {
-	padding: 3px;
-	width: 30px;
-	height: 25px;
-}
-th {
-	background: #f0e6cc;
-}
-.even {
-	background: #fbf8f0;
-}
-.odd {
-	background: #fefcf9;
-}
+        table,
+        td,
+        th {
+            border: 3px solid #595959;
+            border-collapse: collapse;
+        }
 
-#palletReady {
-    background-color: #e6b916;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 20px;
-    font-weight: bold;
-}
+        td,
+        th {
+            padding: 3px;
+            width: 30px;
+            height: 25px;
+        }
 
-#shuttleReady {
-    background-color: #18ae45;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 20px;
-    font-weight: bold;
-}
+        th {
+            background: #f0e6cc;
+        }
 
-.destination {
-    background-color: #e61616;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 20px;
-    font-weight: bold;
-}
+        .even {
+            background: #fbf8f0;
+        }
 
-.reference {
-    background-color: #f8f6ef;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 20px;
-    font-weight: bold;
-}
+        .odd {
+            background: #fefcf9;
+        }
+
+        #palletReady {
+            background-color: #e6b916;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #shuttleReady {
+            background-color: #18ae45;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .destination {
+            background-color: #e61616;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .reference {
+            background-color: #f8f6ef;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
