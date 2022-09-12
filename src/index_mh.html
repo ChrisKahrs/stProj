@@ -1,0 +1,198 @@
+<html>
+
+<head>
+    <title>Aircraft Visualizer</title>
+
+    <script language="JavaScript">
+        // Grab any URL parameters that were provided
+        const params = new URLSearchParams(window.location.search);
+        const darkMode = params.get('_theme') === 'dark';
+
+        function init() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            setTheme();
+
+            // Add an event listener to catch messages from Bonsai
+            window.addEventListener('message', updateVisualizer, false);
+            const bgImg = document.getElementById('bgImg')
+            bgImg.setAttribute("transform", "translate (50,50)");
+        }
+
+        // Run the init() function when the window loads
+        window.onload = init;
+
+        function setTheme() {
+
+            // Adjust the visualizer colors based upon the selected theme 
+            if (darkMode) {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            }
+            else {
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#000';
+            }
+        }
+        // angle = 0;
+        // lift = 0;
+        // function updateVisualizer(liftx, rot) {
+        //     const bgImg = document.getElementById('bgImg');
+        //     angle += rot;
+        //     lift += liftx
+        //     let stringy = 'translate (50,' + (50 + lift) + ') rotate(' + (angle) + ',100,100)';
+        //     bgImg.setAttribute("transform", stringy);
+        // }
+
+        function updateVisualizer() {
+            // const jsonStateBox = document.getElementById('jsonStateBox');
+            const p0 = document.getElementById('p0');
+            const p1 = document.getElementById('p1');
+            const p2 = document.getElementById('p2');
+            const p3 = document.getElementById('p3');
+            const p4 = document.getElementById('p4');
+            const p5 = document.getElementById('p5');
+            const p6 = document.getElementById('p6');
+            const p7 = document.getElementById('p7');
+            const p8 = document.getElementById('p8');
+            const p9 = document.getElementById('p9');
+            const p10 = document.getElementById('p10');
+            const p11 = document.getElementById('p11');
+            const p12 = document.getElementById('p12');
+            const p13 = document.getElementById('p13');
+
+            const s1 = document.getElementById('s1');
+            const s2 = document.getElementById('s2');
+
+            const d1 = document.getElementById('d1');
+            const d2 = document.getElementById('d2');
+            const d3 = document.getElementById('d3');
+            const d4 = document.getElementById('d4');
+
+
+            var jsonData = JSON.parse(event.data);
+
+            // bgImg.setAttribute("transform", "translate (50," + (50 + pitch_angle) + ") rotate(" + (roll_angle) + ",100,100)");
+            // pitch.innerText = "Pitch: " + (pitch_angle).toFixed(3);
+            // airspeedDelta.style.color = "red";
+
+
+        }
+
+    </script>
+    <style>
+table , td, th {
+	border: 3px solid #595959;
+	border-collapse: collapse;
+}
+td, th {
+	padding: 3px;
+	width: 30px;
+	height: 25px;
+}
+th {
+	background: #f0e6cc;
+}
+.even {
+	background: #fbf8f0;
+}
+.odd {
+	background: #fefcf9;
+}
+
+#palletReady {
+    background-color: #e6b916;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#shuttleReady {
+    background-color: #18ae45;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
+    </style>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td></td>
+                <td id="palletReady">0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td id="shuttleReady">Pick</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

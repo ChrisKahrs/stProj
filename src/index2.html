@@ -91,9 +91,6 @@
                 return v;
             }, 2);
 
-  
-            // Compare the new state to the old state
-            // Update the code block and positions of graphical elements 
             jsonStateBox.textContent = jsonStateString;
             jsonActionBox.textContent = jsonActionString;
             jsonRewardBox.textContent = jsonRewardString;
@@ -101,7 +98,6 @@
             jsonStateBoxDiff.textContent = jsonPrevStateDiffString;
             jsonActionBoxDiff.textContent = jsonPrevActionDiffString;
             jsonRewardBoxDiff.textContent = jsonPrevRewardDiffString;
-
 
             jsonDataOld = JSON.parse(JSON.stringify(jsonData));
         }
