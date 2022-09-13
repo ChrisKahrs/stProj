@@ -64,10 +64,20 @@
             for (var i = 0; i < pall.length; i++) {
                 pall[i].innerHTML = "Dest: " + st.pallet_state[i].toString();
             }
- 
-            for (var i = 0; i < pall.length; i++) {
-                pall[i].innerHTML = "Dest: " + st.pallet_state[i].toString();
+            var shut = document.getElementsByClassName("shuttle");
+            for (var i = 0; i < shut.length; i++) {
+                shut[i].innerHTML = "";
+                shut[i].style.backgroundColor = "white";
+                if (i == st.shuttle1_start_position) {
+                    shut[i].innerHTML = "Shut1";
+                    shut[i].style.backgroundColor = "green";
+                }
+                if (i == st.shuttle2_start_position) {
+                    shut[i].innerHTML = "Shut2";
+                    shut[i].style.backgroundColor = "green";
+                }
             }
+            
         }
 
     </script>
@@ -153,20 +163,20 @@
                 <td id="P14" class="pallet">0</td>
             </tr>
             <tr>
-                <td id="S0"></td>
-                <td id="S1"></td>
-                <td id="S2"></td>
-                <td id="S3"></td>
-                <td id="S4"></td>
-                <td id="S6"></td>
-                <td id="S7"></td>
-                <td id="S8"></td>
-                <td id="S9"></td>
-                <td id="S10"></td>
-                <td id="S11"></td>
-                <td id="S12"></td>
-                <td id="S13"></td>
-                <td id="S14"></td>
+                <td id="S0" class="shuttle"></td>
+                <td id="S1" class="shuttle"></td>
+                <td id="S2" class="shuttle"></td>
+                <td id="S3" class="shuttle"></td>
+                <td id="S4" class="shuttle"></td>
+                <td id="S6" class="shuttle"></td>
+                <td id="S7" class="shuttle"></td>
+                <td id="S8" class="shuttle"></td>
+                <td id="S9" class="shuttle"></td>
+                <td id="S10" class="shuttle"></td>
+                <td id="S11" class="shuttle"></td>
+                <td id="S12" class="shuttle"></td>
+                <td id="S13" class="shuttle"></td>
+                <td id="S14" class="shuttle"></td>
             </tr>
             <tr>
                 <td></td>
