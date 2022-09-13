@@ -33,6 +33,34 @@
             }
         }
 
+        function updateVisualizer2(event) {
+            const jsonStateBox = document.getElementById('jsonStateBox');
+            const jsonActionBox = document.getElementById('jsonActionBox');
+            const jsonRewardBox = document.getElementById('jsonRewardBox');
+
+            // Grab the message data 
+            var jsonData = JSON.parse(event.data);
+
+            // Convert message to formatted JSON text for display 
+            // var jsonString = JSON.stringify(jsonData, null, 4);
+            jsonStateString = JSON.stringify(jsonData['state'], function (k, v) {
+                if (v instanceof Array)
+                    return JSON.stringify(v);
+                return v;
+            }, 4);
+            jsonActionString = JSON.stringify(jsonData['action'], function (k, v) {
+                if (v instanceof Array)
+                    return JSON.stringify(v);
+                return v;
+            }, 4);
+            jsonRewardString = jsonData['meta']['reward'];
+
+            // Update the code block and positions of graphical elements 
+            jsonStateBox.textContent = jsonStateString;
+            jsonActionBox.textContent = jsonActionString;
+            jsonRewardBox.textContent = jsonRewardString;
+        }
+
         function updateVisualizer() {
             const s0 = document.getElementById('s0');
             const s1 = document.getElementById('s1');
@@ -107,6 +135,7 @@
                     shut[i].style.backgroundColor = "green";
                 }
             }
+            updateVisualizer2(event);
         }
 
     </script>
@@ -244,7 +273,25 @@
         </tbody>
     </table>
 
-
+<br>
+<table width="100%">
+    <tr>
+        <th width="40%">STATE</th>
+        <th width="40%">ACTION</th>
+        <th>REWARD</th>
+    </tr>
+    <tr>
+        <td width="40%">
+            <pre id="jsonStateBox" style="display: box;">Waiting...</pre>
+        </td>
+        <td width="40%">
+            <pre id="jsonActionBox" style="display: box;">Waiting...</pre>
+        </td>
+        <td>
+            <pre id="jsonRewardBox" style="display: box;">Waiting...</pre>
+        </td>
+    </tr>
+</table>
 </body>
 
 </html>
