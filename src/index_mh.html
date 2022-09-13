@@ -58,26 +58,37 @@
 
             var dest = document.getElementsByClassName("destination");
             for (var i = 0; i < dest.length; i++) {
-                dest[i].innerHTML = "D" + i.toString() + "<br/>" + st.destination[i].toString();
+                dest[i].innerHTML = "D" + i.toString() + "<br>" + st.destination[i].toString();
             };
             var pall = document.getElementsByClassName("pallet");
             for (var i = 0; i < pall.length; i++) {
-                pall[i].innerHTML = "Dest: " + st.pallet_state[i].toString();
+                pall[i].innerHTML = "Pallet<br>Dest: " + st.pallet_state[i].toString();
             }
             var shut = document.getElementsByClassName("shuttle");
             for (var i = 0; i < shut.length; i++) {
                 shut[i].innerHTML = "";
                 shut[i].style.backgroundColor = "white";
                 if (i == st.shuttle1_start_position) {
-                    shut[i].innerHTML = "Shut1";
+                    head_to = shut[i].shuttle_is_delivering[0];
+                    if (head_to == -1) {
+                        head_to = "None";
+                    } else {
+                        head_to = head_to.toString();
+                    }
+                    shut[i].innerHTML = "Shuttle 1<br>Head To:<br>" + head_to.toString();
                     shut[i].style.backgroundColor = "green";
                 }
                 if (i == st.shuttle2_start_position) {
-                    shut[i].innerHTML = "Shut2";
+                    head_to = shut[i].shuttle_is_delivering[1];
+                    if (head_to == -1) {
+                        head_to = "None";
+                    } else {
+                        head_to = head_to.toString();
+                    }
+                    shut[i].innerHTML = "Shuttle 2<br>Head To:<br>" + head_to.toString();
                     shut[i].style.backgroundColor = "green";
                 }
             }
-            
         }
 
     </script>
@@ -116,8 +127,7 @@
             font-weight: bold;
         }
 
-        #shuttleReady {
-            background-color: #18ae45;
+        .shuttle {
             text-align: center;
             vertical-align: middle;
             font-size: 20px;
@@ -168,6 +178,7 @@
                 <td id="S2" class="shuttle"></td>
                 <td id="S3" class="shuttle"></td>
                 <td id="S4" class="shuttle"></td>
+                <td id="S5" class="shuttle"></td>
                 <td id="S6" class="shuttle"></td>
                 <td id="S7" class="shuttle"></td>
                 <td id="S8" class="shuttle"></td>
