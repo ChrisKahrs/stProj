@@ -34,28 +34,20 @@
         }
 
         function updateVisualizer() {
-            const p0 = document.getElementById('p0');
-            const p1 = document.getElementById('p1');
-            const p2 = document.getElementById('p2');
-            const p3 = document.getElementById('p3');
-            const p4 = document.getElementById('p4');
-            const p5 = document.getElementById('p5');
-            const p6 = document.getElementById('p6');
-            const p7 = document.getElementById('p7');
-            const p8 = document.getElementById('p8');
-            const p9 = document.getElementById('p9');
-            const p10 = document.getElementById('p10');
-            const p11 = document.getElementById('p11');
-            const p12 = document.getElementById('p12');
-            const p13 = document.getElementById('p13');
-
+            const s0 = document.getElementById('s0');
             const s1 = document.getElementById('s1');
             const s2 = document.getElementById('s2');
-
-            const d0 = document.getElementById('d0');
-            const d1 = document.getElementById('d1');
-            const d2 = document.getElementById('d2');
-            const d3 = document.getElementById('d3');
+            const s3 = document.getElementById('s3');
+            const s4 = document.getElementById('s4');
+            const s5 = document.getElementById('s5');
+            const s6 = document.getElementById('s6');
+            const s7 = document.getElementById('s7');
+            const s8 = document.getElementById('s8');
+            const s9 = document.getElementById('s9');
+            const s10 = document.getElementById('s10');
+            const s11 = document.getElementById('s11');
+            const s12 = document.getElementById('s12');
+            const s13 = document.getElementById('s13');
 
             var jsonData = JSON.parse(event.data);
             st = jsonData.state;
@@ -69,6 +61,10 @@
                 dest[i].innerHTML = "D" + i.toString() + "<br/>" + st.destination[i].toString();
             };
             var pall = document.getElementsByClassName("pallet");
+            for (var i = 0; i < pall.length; i++) {
+                pall[i].innerHTML = "Dest: " + st.pallet_state[i].toString();
+            }
+ 
             for (var i = 0; i < pall.length; i++) {
                 pall[i].innerHTML = "Dest: " + st.pallet_state[i].toString();
             }
