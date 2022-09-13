@@ -74,18 +74,36 @@
                         head_to = "None";
                     } else {
                         head_to = head_to.toString();
-                    }
-                    shut[i].innerHTML = "Shuttle 1<br>Head To:<br>" + head_to.toString() + "<br>Action:" + ac.action_1.toString();
+                    };
+                    if (ac.action_1 == 0) {
+                        action_string = "None";
+                    } else if (ac.action_1 == 1) {
+                        action_string = "Left";
+                    } else if (ac.action_1 == 2) {
+                        action_string = "Right";
+                    } else {
+                        action_string = "Pickup";
+                    };
+                    shut[i].innerHTML = "Shuttle 1<br>Head To:<br>" + head_to.toString() + "<br>Action:<br>" + action_string;
                     shut[i].style.backgroundColor = "green";
-                }
+                };
                 if (i == st.shuttle2_start_position) {
                     head_to = st.shuttle_is_delivering[1];
                     if (head_to == -1) {
                         head_to = "None";
                     } else {
                         head_to = head_to.toString();
-                    }
-                    shut[i].innerHTML = "Shuttle 2<br>Head To:<br>" + head_to.toString()+ "<br>Action:" + ac.action_2.toString();
+                    };
+                    if (ac.action_1 == 0) {
+                        action_string = "None";
+                    } else if (ac.action_1 == 1) {
+                        action_string = "Left";
+                    } else if (ac.action_1 == 2) {
+                        action_string = "Right";
+                    } else {
+                        action_string = "Pickup";
+                    };
+                    shut[i].innerHTML = "Shuttle 2<br>Head To:<br>" + head_to.toString()+ "<br>Action:<br>" + action_string;
                     shut[i].style.backgroundColor = "green";
                 }
             }
