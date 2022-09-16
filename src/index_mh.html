@@ -93,7 +93,9 @@
                 pall[i].innerHTML = "Pallet<br>Dest: " + st.pallet_state[i].toString();
             }
             var shut = document.getElementsByClassName("shuttle");
-            for (var i = 0; i < shut.length; i++) {
+            
+            for (var i = 0; i < shut.length; i++) { 
+
                 shut[i].innerHTML = "";
                 shut[i].style.backgroundColor = "white";
                 if (i == st.shuttle1_start_position) {
